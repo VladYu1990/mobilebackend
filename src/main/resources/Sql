@@ -1,0 +1,61 @@
+create table tasks(
+uuid text,
+exercise_UUID text,
+student_uuid text,
+next_Repetition timestamp,
+last_Repetition timestamp,
+status text,
+count_Right_Responses int
+);
+
+
+create table answers (
+uuid text,
+code text,
+value text,
+sound_url text,
+answer_similar_uuid text
+);
+
+create table answer_and_similar (
+answer_true text,
+answer_similar_uuid text,
+similarity_weight numeric
+);
+
+create table example (
+uuid text,
+exercise_type text,
+source_uuid text,
+value text,
+translation text,
+direction text,
+partOfSpeech text);
+
+create table students (
+uuid text,
+code text,
+user_uuid text,
+student_full_name text,
+native_languages text,
+languages_for_study text,
+date_created timestamp
+);
+
+
+create table users (
+uuid text,
+login text,
+password text,
+token text,
+date_create_token timestamp,
+date_death_token timestamp
+);
+
+create table replies_received (
+uuid_student text,
+uuid_task text,
+uuid_answer text,
+response_time timestamp
+);
+
