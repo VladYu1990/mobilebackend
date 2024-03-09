@@ -16,6 +16,10 @@ public class Response {
     private String request_status;
     private Object result;
 
+    public Response(String request_status) {
+        this.request_status = request_status;
+    }
+
     public String getRequest_status() {
         return request_status;
     }

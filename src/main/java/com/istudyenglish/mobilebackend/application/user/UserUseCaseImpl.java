@@ -7,6 +7,7 @@ import com.istudyenglish.mobilebackend.domain.Autorisation.User;
 import com.istudyenglish.mobilebackend.port.in.user.UserUseCase;
 
 import java.time.Instant;
+import java.util.UUID;
 
 @Service
 public class UserUseCaseImpl implements UserUseCase {
@@ -27,6 +28,8 @@ public class UserUseCaseImpl implements UserUseCase {
 
     public User logIn(String login, String password) {
         return userDAO.get(login,password);
+
+
 
     }
 

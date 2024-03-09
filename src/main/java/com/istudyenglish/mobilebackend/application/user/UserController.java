@@ -22,28 +22,37 @@ public class UserController {
         this.userUseCase = userUseCase;
     }
 
-    @PostMapping("/create/{login}/{password}")
-    public void create(@RequestHeader Map<String, String> headers,
-                       @PathVariable String login,@PathVariable String password,
-                       @RequestParam(defaultValue = "") String time) {
+    @PostMapping("/create/")
+    public void create(@RequestHeader Map<String, String> headers) {
 
-        Instant instant = Instant.now();
-        if(!time.equals("")){
-            Instant.parse(time);
-        }
-        userUseCase.create(login,password, instant);
+        userUseCase.create(
+                headers.get("login"),
+                headers.get("password"),
+                headers.get("phoneNumber"));
     }
 
-    @GetMapping("/login/{login}/{password}")
-    public Response getNext(@RequestHeader Map<String, String> headers,
-                            @PathVariable String login, @PathVariable String password,
-                            @RequestParam(defaultValue = "") String time){
-        Instant instant = Instant.now();
-        if(!time.equals("")){
-            Instant.parse(time);
-        }
-        User user = userUseCase.logIn(login,password);
-        return new Response("ок",user.getToken());
+    @GetMapping("/login/")
+    public Response login(@RequestHeader Map<String, String> headers){
+
+        return new Response("ок",
+                userUseCase.logIn(
+                    headers.get("login"),
+                    headers.get("password")));
     }
 
+    @PutMapping("/new_password/")
+    public Response setNewPassword(@RequestHeader Map<String, String> headers) {
+        try {
+            User user = userUseCase.get(
+                    headers.get("token"));
+            user.setNewPassword("password");
+            return new Response("ok");
+        }
+        catch (Exception e){
+            return new Response("ok",e);
+        }
+
+
+
+    }
 }

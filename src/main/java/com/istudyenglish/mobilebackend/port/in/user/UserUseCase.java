@@ -4,6 +4,7 @@ package com.istudyenglish.mobilebackend.port.in.user;
 import com.istudyenglish.mobilebackend.domain.Autorisation.User;
 
 import java.time.Instant;
+import java.util.UUID;
 
 public interface UserUseCase {
     void create(String login, String password, String phoneNumber);
