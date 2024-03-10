@@ -1,9 +1,8 @@
 package com.istudyenglish.mobilebackend.domain.Autorisation;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import com.istudyenglish.mobilebackend.application.CustomException.CustomException;
+import com.istudyenglish.mobilebackend.application.CustomException.CustomExceptionCode;
+import lombok.*;
 
 import java.time.Instant;
 import java.time.temporal.TemporalUnit;
@@ -12,6 +11,7 @@ import java.util.UUID;
 import static java.time.temporal.ChronoUnit.DAYS;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Builder
 public class User {
@@ -28,41 +28,23 @@ public class User {
      */
     private String password;
     /**
-     * Токен пользователя
+     * Номер телефона пользователя
      */
     private String phoneNumber;
-    private UUID token;
-    /**
-     * Дата/время создания токена
-     */
-    private Instant dateCreateToken;
-    /**
-     * Дата/время смерти токена
-     */
-    private Instant dateDeathToken;
-    /**
-     * Активный или заблокированный юзер
-     */
-    private boolean active;
 
     public User(String login, String password, String phoneNumber) {
         this.uuid = UUID.randomUUID();
         this.login = login;
         this.password = password;
         this.phoneNumber = phoneNumber;
-        refreshToken();
     }
 
     public void setNewPassword(String password) {
         this.password = password;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public boolean checkToken(){
-        if(this.dateCreateToken.isAfter(Instant.now())){
+    public boolean checkPassword(String password){
+        if(this.password.equals(password)){
             return true;
         }
         else {
@@ -70,12 +52,6 @@ public class User {
         }
     }
 
-    public void refreshToken() {
-        this.token = UUID.randomUUID();
-        this.dateCreateToken = Instant.now();
-        Instant instant = Instant.now();
-        instant.plus(30, DAYS);
-        this.dateDeathToken = instant;
-    }
+
 
 }

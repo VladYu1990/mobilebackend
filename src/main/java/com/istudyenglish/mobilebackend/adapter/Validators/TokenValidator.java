@@ -23,7 +23,7 @@ public class TokenValidator {
 
     public void check(String token) throws Exception{
         try {
-            User user = userDBPort.get(token);
+            User user = userDBPort.getByUUID(token);
             if (userUseCase.checkToken(user)){
                 throw new Exception("Token is old");
             }

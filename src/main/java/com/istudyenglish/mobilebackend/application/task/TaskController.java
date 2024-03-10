@@ -2,6 +2,8 @@ package com.istudyenglish.mobilebackend.application.task;
 
 import com.istudyenglish.mobilebackend.adapter.Response;
 import com.istudyenglish.mobilebackend.adapter.task.CreatorTaskDTO;
+import com.istudyenglish.mobilebackend.domain.Autorisation.Token;
+import com.istudyenglish.mobilebackend.domain.Autorisation.User;
 import com.istudyenglish.mobilebackend.port.in.task.TaskAdapter;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,9 +53,11 @@ public class TaskController {
         if(!time.equals("")){
             Instant.parse(time);
         }
+        //todo тут какой-то мрак получился
+        Token token =
+        User user =
         Collection<Task> taskCollection =
                 taskAdapter.getNextTask(
-                        headers.get("token"),
                         headers.get("student_code"),
                         amount_tasks,
                         instant);

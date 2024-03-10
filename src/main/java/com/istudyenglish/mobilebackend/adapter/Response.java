@@ -3,18 +3,16 @@ package com.istudyenglish.mobilebackend.adapter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
-
-import java.util.Collection;
+import lombok.Setter;
 
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Response {
 
     private String request_status;
-    private Object result;
+    private Object result_object;
 
     public Response(String request_status) {
         this.request_status = request_status;
@@ -24,7 +22,7 @@ public class Response {
         return request_status;
     }
 
-    public Object getResult() {
-        return result;
+    public Object getResult_object() {
+        return result_object;
     }
 }

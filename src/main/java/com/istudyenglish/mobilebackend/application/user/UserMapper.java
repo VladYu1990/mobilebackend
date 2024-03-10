@@ -10,6 +10,8 @@ import java.util.UUID;
 
 @Component
 public class UserMapper implements RowMapper<User> {
+
+
     @Override
     public User mapRow(ResultSet resultSet, int rowNum) throws SQLException {
 
@@ -17,9 +19,7 @@ public class UserMapper implements RowMapper<User> {
                 uuid(UUID.fromString(resultSet.getString("uuid"))).
                 login(resultSet.getString("login")).
                 password(resultSet.getString("password")).
-                token(UUID.fromString(resultSet.getString("token"))).
-                dateCreateToken(resultSet.getTimestamp("date_create_token").toInstant()).
-                dateDeathToken(resultSet.getTimestamp("date_death_token").toInstant()).
+                phoneNumber(resultSet.getString("phone_number")).
                 build();
     }
 }

@@ -46,23 +46,15 @@ public class TaskAdapterImpl implements TaskAdapter {
         this.answerUseCase = answerUseCase;
     }
 
-    public void create(String token, String studentCode, String exerciseUUID, Instant time) throws Exception {
-
-        tokenValidator.check(token);
-        User user = userUseCase.get(token);
-        Student student = studentUseCase.get(studentCode);
-        studentUserAffiliationValidator.check(user,student);
-        Exercise exercise = exerciseUseCase.get(UUID.fromString(exerciseUUID));
-        taskUseCase.createTask(student,exercise,time);
+    public void create(String studentCode, String exerciseUUID, Instant time) throws Exception {
+//todo
 
     }
 
 
-    public Collection<Task> getNextTask(String token, String studentCode, int amount, Instant time) throws Exception {
-        tokenValidator.check(token);
-        User user = userUseCase.get(token);
+    public Collection<Task> getNextTask(String studentCode, int amount, Instant time) throws Exception {
+
         Student student = studentUseCase.get(studentCode);
-        studentUserAffiliationValidator.check(user,student);
 
         return taskUseCase.getNextTasks(student,amount,time);
     }
@@ -70,7 +62,7 @@ public class TaskAdapterImpl implements TaskAdapter {
 
     public boolean checkAnswer(String token, String studentCode, String taskCode, String answerCode) throws Exception {
         tokenValidator.check(token);
-        User user = userUseCase.get(token);
+        User user = userUseCase.getByToken(token);
         Student student = studentUseCase.get(studentCode);
         studentUserAffiliationValidator.check(user,student);
         Answer answer = answerUseCase.getByCode(answerCode);
@@ -82,7 +74,7 @@ public class TaskAdapterImpl implements TaskAdapter {
 
     public void returnAnswer(String token, String studentCode, String taskCode, String answerCode, Instant time) throws Exception {
         tokenValidator.check(token);
-        User user = userUseCase.get(token);
+        User user = userUseCase.getByToken(token);
         Student student = studentUseCase.get(studentCode);
         studentUserAffiliationValidator.check(user,student);
         Answer answer = answerUseCase.getByCode(answerCode);

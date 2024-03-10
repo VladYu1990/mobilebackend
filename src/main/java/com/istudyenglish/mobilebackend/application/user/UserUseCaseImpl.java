@@ -1,57 +1,74 @@
 package com.istudyenglish.mobilebackend.application.user;
 
+import com.istudyenglish.mobilebackend.application.CustomException.CustomException;
+import com.istudyenglish.mobilebackend.application.CustomException.CustomExceptionCode;
+import com.istudyenglish.mobilebackend.domain.Autorisation.PasswordValidator;
 import com.istudyenglish.mobilebackend.port.out.User.UserDBPort;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.istudyenglish.mobilebackend.domain.Autorisation.User;
 import com.istudyenglish.mobilebackend.port.in.user.UserUseCase;
 
-import java.time.Instant;
 import java.util.UUID;
 
 @Service
+@Log4j2
 public class UserUseCaseImpl implements UserUseCase {
 
     UserDBPort userDAO;
+    PasswordValidator passwordValidator;
 
 
     @Autowired
-    public UserUseCaseImpl(UserDAO userDAO) {
+     public UserUseCaseImpl(UserDBPort userDAO, PasswordValidator passwordValidator) {
         this.userDAO = userDAO;
+        this.passwordValidator = passwordValidator;
     }
 
-    public void create(String login, String password, String phoneNumber) {
+    public void create(String login, String password, String phoneNumber) throws CustomException{
         User user = new User(login,password,phoneNumber);
         userDAO.create(user);
 
     }
 
-    public User logIn(String login, String password) {
-        return userDAO.get(login,password);
+    public User logIn(String login,String password) throws CustomException {
+
+        User user = new User();
+        try {
+            user = userDAO.getByLogin(login);
+            if (!user.checkPassword(password)) {
+                throw new CustomException(CustomExceptionCode.PasswordDoNotExist);
+            }
+            return user;
+        }
+        catch (NullPointerException npe){
+                log.info(npe.getMessage());
+                throw new CustomException(CustomExceptionCode.LoginDoNotExist);
+            }
+        }
 
 
-
+    @Override
+    public User getByUUID(UUID userUUID) throws CustomException {
+        try {
+            User user = userDAO.getByUUID(userUUID);
+            return user;
+        }
+        catch (NullPointerException npe){
+            log.info(npe.getMessage());
+            throw new CustomException(CustomExceptionCode.LoginDoNotExist);
+        }
     }
 
-    public User get(String tokenStr) throws Exception {
-        return userDAO.get(tokenStr);
+    public String setNewPassword(User user, String password) {
+
+        passwordValidator.validatePassword(password);
+        if (passwordValidator.isValid()){
+            user.setNewPassword(password);
+            return "ok";
+        }
+        else {return passwordValidator.getMessage();}
     }
 
-    public void block(User user) {
-        user.setActive(false);
-        userDAO.update(user);
-    }
-
-    public void unblock(User user) {
-        user.setActive(true);
-        userDAO.update(user);
-    }
-
-    public boolean checkToken(User user) {
-       return user.checkToken();
-    }
-
-    public void setNewPassword(User user, String password) {
-        user.setNewPassword(password);
-    }
 }

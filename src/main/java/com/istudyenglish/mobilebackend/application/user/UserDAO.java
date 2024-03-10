@@ -14,6 +14,8 @@ import java.util.UUID;
 @Log4j2
 public class UserDAO implements UserDBPort {
 
+
+
     JdbcTemplate jdbcTemplate;
 
     UserMapper userMapper;
@@ -25,64 +27,31 @@ public class UserDAO implements UserDBPort {
     }
 
     public void create(User user) {
-//todo
+        String sql = "INSERT INTO users (uuid,login,password,phone_number) " +
+                "VALUES (" + user.getUuid() + ",'" + user.getLogin() + "','" + user.getPassword()+ "','" +
+                user.getPhoneNumber() + "');";
+        jdbcTemplate.update(sql);
     }
 
-    public User get(UUID uuid) throws Exception{
-        try {
-            String sql = "select * from users " +
+    public User getByUUID(UUID uuid) throws NullPointerException{
+        String sql = "select * from users " +
                     "where uuid in ('" + uuid.toString()+ "');";
 
-            return jdbcTemplate.query(sql,userMapper).get(0);
-        }
-        catch (NullPointerException npe){
-            log.error("User UUID" + uuid.toString() + " isn't valid");
-            throw npe;
-        }
+        return jdbcTemplate.query(sql,userMapper).get(0);
     }
 
-    public User getLogin(String login) throws Exception{
-        try {
-            String sql = "select * from users " +
+    public User getByLogin(String login) throws NullPointerException{
+        String sql = "select * from users " +
                     "where login in ('" + login + "');";
 
-            return jdbcTemplate.query(sql,userMapper).get(0);
-        }
-        catch (NullPointerException npe){
-            log.error("User Login" + login + " isn't valid");
-            throw npe;
-        }
+        return jdbcTemplate.query(sql,userMapper).get(0);
     }
 
-    public User get(String tokenStr) throws Exception {
-        try {
-            String sql = "select * from users " +
-                    "where token in ('" + tokenStr + "')" +
-                    "and date_death_token >= ('" + Instant.now() + "');";
-
-            return jdbcTemplate.query(sql,userMapper).get(0);
-        }
-        catch (NullPointerException npe){
-            log.error("Token " + tokenStr + " isn't valid");
-            throw npe;
-        }
-    }
-
-    public User get(String login,String password){
-        String sql = "select * from users " +
-                    "where login in ('" + login + "')" +
-                    "and password in ('" + password + "');";
-            return jdbcTemplate.query(sql,userMapper).get(0);
-
-    }
 
     public void update(User user) {
         String sql = "update users set \n" +
                 "password = '" + user.getPassword() + "',\n" +
-                "token = '" + user.getToken() + "',\n" +
-                "date_create_token = '" + user.getDateCreateToken() + "',\n" +
-                "date_death_token = '" + user.getDateDeathToken() + "',\n" +
-                "active = '" + user.isActive() + "'n" +
+                "phone_number = '" + user.getPhoneNumber() + "',\n" +
                 "where uuid in ('" + user.getUuid() + "');";
 
                 jdbcTemplate.update(sql);

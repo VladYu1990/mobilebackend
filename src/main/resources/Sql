@@ -44,18 +44,26 @@ date_created timestamp
 
 
 create table users (
-uuid text,
-login text,
-password text,
-token text,
-date_create_token timestamp,
-date_death_token timestamp
+uuid uuid PRIMARY KEY,
+login text not null,
+password text not null,
+phone_number text not null,
+CONSTRAINT login_uniqueness UNIQUE (login),
+CONSTRAINT phone_number_uniqueness UNIQUE (phone_number)
 );
+
 
 create table replies_received (
 uuid_student text,
 uuid_task text,
 uuid_answer text,
 response_time timestamp
+);
+
+create table tokens (
+uuid uuid PRIMARY KEY,
+dateCreateToken timestamp not null,
+dateDeathToken timestamp not null,
+user_uuid uuid not null
 );
 
