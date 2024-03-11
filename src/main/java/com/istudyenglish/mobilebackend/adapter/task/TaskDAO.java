@@ -27,7 +27,7 @@ public class TaskDAO implements TaskDBPort {
         this.taskMapper = taskMapper;
     }
 
-    public Task getByUUID(UUID uuid) {
+    public Task get(UUID uuid) {
         String sql = "select * from tasks where uuid in ('" + uuid.toString() + "');";
         log.info(sql);
         return jdbcTemplate.query(sql, taskMapper).get(0);
@@ -80,7 +80,7 @@ public class TaskDAO implements TaskDBPort {
     }
 
 
-    public void update(Collection<Task> taskCollection, Instant instant) {
+    public void update(Collection<Task> taskCollection) {
         StringBuilder stringBuilder = new StringBuilder();
         for(Task i:taskCollection){
             stringBuilder.append(
@@ -97,7 +97,7 @@ public class TaskDAO implements TaskDBPort {
         jdbcTemplate.update(stringBuilder.toString());
     }
 
-    public void update(Task task, Instant instant) {
+    public void update(Task task) {
         String sql =
                     "update tasks " +
                     "set\n" +
@@ -111,7 +111,5 @@ public class TaskDAO implements TaskDBPort {
         jdbcTemplate.update(sql);
     }
 
-    public void delete(Collection<Task> taskCollection, Instant instant) {
-    }
 
 }

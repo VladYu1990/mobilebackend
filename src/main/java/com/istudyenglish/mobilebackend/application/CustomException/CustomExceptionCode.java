@@ -6,7 +6,9 @@ public enum CustomExceptionCode {
     PasswordDoNotExist,
     PasswordDoNotValid,
     TokenIsDead,
-    TokenDoNotExist;
+    TokenDoNotExist,
+    AssignmentDoesNotBelongToStudent;
+
 
     private String message;
 

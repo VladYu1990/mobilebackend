@@ -54,10 +54,10 @@ CONSTRAINT phone_number_uniqueness UNIQUE (phone_number)
 
 
 create table replies_received (
-uuid_student text,
 uuid_task text,
 uuid_answer text,
-response_time timestamp
+response_time timestamp,
+correct boolean
 );
 
 create table tokens (

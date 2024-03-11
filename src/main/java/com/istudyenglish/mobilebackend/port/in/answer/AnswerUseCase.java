@@ -15,7 +15,7 @@ public interface AnswerUseCase {
     void update();
     void delete();
 
-    void saveAnswer(Student student, Task task, Answer answer, Instant answerTime);
+    void saveAnswer(Task task, Answer answer, Instant answerTime,boolean isTrue);
 
     Answer getByCode(String answerCode);
 }

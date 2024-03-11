@@ -27,11 +27,6 @@ public class ExerciseDAO implements ExerciseDBPort {
         return jdbcTemplate.query(sql,exerciseMapper).get(0);
     }
 
-    public Exercise get(String code) {
-        String sql = "select * from exercises where code in ('" + code + "');";
-
-        return jdbcTemplate.query(sql,exerciseMapper).get(0);
-    }
 
     public void save(Exercise exercise) {
 

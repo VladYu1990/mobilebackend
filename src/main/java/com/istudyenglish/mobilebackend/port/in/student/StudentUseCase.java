@@ -9,8 +9,6 @@ import java.util.UUID;
 public interface StudentUseCase {
     void create(UUID userUUID, String fullName, Languages nativeLanguages, Languages languagesForStudy, Instant instant);
     Student get(UUID studentUUID);
-
-    Student get(String studentCode) throws Exception;
     void rename(Student student,String newFullName);
 
     boolean checkAffilationUser(Student student, UUID uuid);

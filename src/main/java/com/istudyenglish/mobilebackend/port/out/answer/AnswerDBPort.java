@@ -17,8 +17,8 @@ public interface AnswerDBPort {
 
     void delete(Collection<Task> taskCollection, Instant instant);
 
-
-    void saveAnswer(Student student, Task task, Answer answer, Instant answerTime);
+//todo вынести такой тип овтета в отдельный объект/отдельное фло/отдельную таблицу
+    void saveAnswer(Task task, Answer answer, Instant answerTime,boolean isTrue);
 
     Answer getByCode(String answerCode);
 }

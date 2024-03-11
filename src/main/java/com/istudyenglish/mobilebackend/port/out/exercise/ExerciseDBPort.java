@@ -7,7 +7,6 @@ import java.util.UUID;
 public interface ExerciseDBPort {
 
     Exercise get(UUID uuid);
-    Exercise get(String code);
     void save(Exercise exercise);
     void update(Exercise exercise);
     void delete(Exercise exercise);

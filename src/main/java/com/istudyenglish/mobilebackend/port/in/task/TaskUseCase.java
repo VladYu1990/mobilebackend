@@ -1,6 +1,7 @@
 package com.istudyenglish.mobilebackend.port.in.task;
 
 
+import com.istudyenglish.mobilebackend.application.CustomException.CustomException;
 import com.istudyenglish.mobilebackend.domain.Education.Answer;
 import com.istudyenglish.mobilebackend.domain.Education.Exercise;
 import com.istudyenglish.mobilebackend.domain.Education.Student;
@@ -27,15 +28,11 @@ public interface TaskUseCase {
 
 void createTask(Student student, Exercise exercise, Instant instant);
 void createTasks(Student student,Collection<Exercise> exerciseList, Instant instant);
-Task getByUUID(UUID uuid);
-Task getByCode(String taskCode);
+Task get(UUID uuid);
 Collection<Task> getNextTasks(Student student,int amount,Instant instant);
-boolean checkAnswer(Task task, Answer answer);
-void delete(Task task, Instant instant);
-void deleteTasks(Collection<Task> taskCollection, Instant instant);
-void processAnswer(UUID taskUUID, UUID answerUUID,Instant instant);
+void checkStudentAffiliation(Task task,UUID studentUUID) throws CustomException;
 
-boolean checkStudentAffiliation(Task task,UUID studentUUID);
+void updateAfterReply(Task task,boolean trueReply,Instant time);
 
 
 }

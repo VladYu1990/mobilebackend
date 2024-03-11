@@ -8,7 +8,6 @@ import java.util.UUID;
 public interface ExerciseUseCase {
 
     Exercise get(UUID uuid);
-    Exercise get(String code);
     void create(Source source);
     void delete(Exercise exercise);
 }

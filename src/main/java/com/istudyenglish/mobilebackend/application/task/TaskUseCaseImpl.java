@@ -1,10 +1,11 @@
 package com.istudyenglish.mobilebackend.application.task;
 
-import com.istudyenglish.mobilebackend.adapter.task.CreatorTaskDTO;
+import com.istudyenglish.mobilebackend.adapter.task.ConvertorToTaskDTO;
 import com.istudyenglish.mobilebackend.adapter.task.TaskDAO;
+import com.istudyenglish.mobilebackend.application.CustomException.CustomException;
+import com.istudyenglish.mobilebackend.application.CustomException.CustomExceptionCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.istudyenglish.mobilebackend.domain.Education.Answer;
 import com.istudyenglish.mobilebackend.domain.Education.Exercise;
 import com.istudyenglish.mobilebackend.domain.Education.Student;
 import com.istudyenglish.mobilebackend.domain.Education.Task.Task;
@@ -18,7 +19,7 @@ import java.util.UUID;
 @Component
 public class TaskUseCaseImpl implements TaskUseCase {
 
-    private CreatorTaskDTO creatorTaskDTO;
+    private ConvertorToTaskDTO convertorToTaskDTO;
 
     private TaskCreator taskCreator;
 
@@ -27,8 +28,8 @@ public class TaskUseCaseImpl implements TaskUseCase {
     private TaskAnswerChecker taskAnswerChecker;
 
     @Autowired
-    public TaskUseCaseImpl(CreatorTaskDTO creatorTaskDTO, TaskCreator taskCreator, TaskDAO taskDAO, TaskAnswerChecker taskAnswerChecker) {
-        this.creatorTaskDTO = creatorTaskDTO;
+    public TaskUseCaseImpl(ConvertorToTaskDTO convertorToTaskDTO, TaskCreator taskCreator, TaskDAO taskDAO, TaskAnswerChecker taskAnswerChecker) {
+        this.convertorToTaskDTO = convertorToTaskDTO;
         this.taskCreator = taskCreator;
         this.taskDAO = taskDAO;
         this.taskAnswerChecker = taskAnswerChecker;
@@ -49,19 +50,10 @@ public class TaskUseCaseImpl implements TaskUseCase {
         }
         taskDAO.save(taskCollection,instant);
     }
-    public Task getByUUID(UUID taskUUID){
-        return taskDAO.getByUUID(taskUUID);
+    public Task get(UUID taskUUID){
+        return taskDAO.get(taskUUID);
     }
 
-    @Override
-    public Task getByCode(String taskCode) {
-        return taskDAO.getByCode(taskCode);
-    }
-
-    public Task getNextTask(Student student,int amount) {
-        //todo
-        return null;
-    }
     public Collection<Task> getNextTasks(Student student, int amount,Instant time) {
         //todo
         Collection<Task> taskCollection = new ArrayList<Task>();
@@ -73,40 +65,22 @@ public class TaskUseCaseImpl implements TaskUseCase {
 
         return taskCollection;
     }
-    public boolean checkAnswer(Task task, Answer answer) {
-        task.getExerciseUUID();
-        //todo
-        //Exercise.getAnswer()==Answer.getByUUID(uuidAnswer).getValue;
-        return false;
+
+
+    public void checkStudentAffiliation(Task task, UUID studentUUID) throws CustomException {
+        if(!task.checkStudentAffiliation(studentUUID)){
+            throw new CustomException(CustomExceptionCode.AssignmentDoesNotBelongToStudent);
+        }
     }
 
-     public void delete(Task task, Instant instant){
-        Collection<Task> taskCollection = new ArrayList<Task>();
-        taskCollection.add(task);
-        deleteTasks(taskCollection,instant);
-    }
-
-    public void deleteTasks(Collection<Task> taskCollection, Instant instant){
-        taskDAO.delete(taskCollection,instant);
-    }
-
-
-    public void processAnswer(UUID taskUUID, UUID answerUUID,Instant instant) {
-        Task task = taskDAO.getByUUID(taskUUID);
-        if(taskAnswerChecker.check(task,answerUUID)){
-            task.updateIfAnswerIsTrue(instant);
+    public void updateAfterReply(Task task, boolean trueReply,Instant time) {
+        if(trueReply){
+            task.updateIfAnswerIsTrue(time);
         }
         else {
-            task.updateIfAnswerIsFalse(instant);
+            task.updateIfAnswerIsFalse(time);
         }
-        Collection<Task> taskCollection = new ArrayList<Task>();
-        taskCollection.add(task);
-        taskDAO.update(taskCollection,instant);
+
+        taskDAO.update(task);
     }
-
-    public boolean checkStudentAffiliation(Task task, UUID studentUUID) {
-        return task.checkStudentAffiliation(studentUUID);
-    }
-
-
 }

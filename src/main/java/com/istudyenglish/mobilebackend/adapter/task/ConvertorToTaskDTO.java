@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Component
-public class CreatorTaskDTO {
+public class ConvertorToTaskDTO {
 
 
     ConvertorAnswerDTO convertorAnswerDTO;
@@ -28,7 +28,7 @@ public class CreatorTaskDTO {
     SimilarAnswerUseCase similarAnswerUseCase;
 
     @Autowired
-    public CreatorTaskDTO(ConvertorAnswerDTO convertorAnswerDTO, AnswerUseCaseImpl answerUseCase, ExerciseUseCaseImpl exerciseUseCase, SimilarAnswerUseCaseImpl similarAnswerUseCase) {
+    public ConvertorToTaskDTO(ConvertorAnswerDTO convertorAnswerDTO, AnswerUseCaseImpl answerUseCase, ExerciseUseCaseImpl exerciseUseCase, SimilarAnswerUseCaseImpl similarAnswerUseCase) {
         this.convertorAnswerDTO = convertorAnswerDTO;
         this.answerUseCase = answerUseCase;
         this.exerciseUseCase = exerciseUseCase;
@@ -52,22 +52,11 @@ public class CreatorTaskDTO {
         for (Task i:taskCollection){
             taskDTOCollection.add(convert(i,count));
         }
-
         return taskDTOCollection;
     }
 
     private Collection<AnswerDTO> addCollectionAnswerDTO(String value, int count){
 
         return convertorAnswerDTO.convert(answerUseCase.getByString(value),count);
-    }
-
-    private QuestionDTO addQuestionDTO(){
-
-        return null;
-    }
-
-    private ExampleDTO addExampleDTO(){
-
-        return null;
     }
 }

@@ -28,11 +28,6 @@ public class ExerciseUseCaseImpl implements ExerciseUseCase {
         return exerciseDBport.get(uuid);
     }
 
-    public Exercise get(String code) {
-
-        return exerciseDBport.get(code);
-    }
-
     public void create(Source source) {
         exerciseCreator.create(source);
     }

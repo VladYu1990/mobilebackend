@@ -1,7 +1,6 @@
 package com.istudyenglish.mobilebackend.adapter.answer;
 
 import com.istudyenglish.mobilebackend.domain.Education.Answer;
-import com.istudyenglish.mobilebackend.domain.Education.Student;
 import com.istudyenglish.mobilebackend.domain.Education.Task.Task;
 import com.istudyenglish.mobilebackend.port.out.answer.AnswerDBPort;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,12 +44,12 @@ public class AnswerDAO implements AnswerDBPort {
 
     }
 
-    public void saveAnswer(Student student, Task task, Answer answer, Instant answerTime) {
+    public void saveAnswer(Task task, Answer answer, Instant answerTime,boolean isTrue) {
         String sql = "insert into replies_received values (\n" +
-                "'" + student.getUuid() + "',\n" +
                 "'" + task.getUuid() + "',\n" +
                 "'" + answer.getUuid() + "',\n" +
-                "'" + answerTime.toString() + "');";
+                "'" + answerTime.toString() + "',\n" +
+                "'" + isTrue + "');";
 
         jdbcTemplate.update(sql);
     }

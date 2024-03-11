@@ -50,4 +50,13 @@ public class Exercise {
     public void setTypeOfDirectionsTranslations(TypesOfDirectionsTranslations typeOfDirectionsTranslations) {
         this.typeOfDirectionsTranslations = typeOfDirectionsTranslations;
     }
+
+    public boolean checkReply(String reply){
+        if(translate.equals(reply)){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }

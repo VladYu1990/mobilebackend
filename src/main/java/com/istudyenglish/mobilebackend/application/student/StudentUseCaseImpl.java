@@ -46,11 +46,6 @@ public class StudentUseCaseImpl implements StudentUseCase{
         return null;
     }
 
-    public Student get(String studentCode) throws Exception {
-        return studentDAO.get(studentCode);
-    }
-
-
     public void rename(Student student,String newFullName) {
         student.setStudentFullName(newFullName);
         studentDAO.update(student);

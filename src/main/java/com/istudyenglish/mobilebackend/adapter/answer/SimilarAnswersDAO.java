@@ -8,7 +8,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
-import java.util.UUID;
 
 @Component
 public class SimilarAnswersDAO implements SimilarAnswersDBport {
