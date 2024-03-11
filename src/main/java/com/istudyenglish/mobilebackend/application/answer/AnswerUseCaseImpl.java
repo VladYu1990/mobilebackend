@@ -1,6 +1,5 @@
 package com.istudyenglish.mobilebackend.application.answer;
 
-import com.istudyenglish.mobilebackend.adapter.answer.SimilarAnswersDAO;
 import com.istudyenglish.mobilebackend.domain.Education.Answer;
 import com.istudyenglish.mobilebackend.adapter.answer.AnswerDAO;
 import com.istudyenglish.mobilebackend.domain.Education.Task.Task;

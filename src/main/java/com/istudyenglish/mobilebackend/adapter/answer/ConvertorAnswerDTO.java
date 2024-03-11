@@ -3,7 +3,7 @@ package com.istudyenglish.mobilebackend.adapter.answer;
 import com.istudyenglish.mobilebackend.domain.Education.Answer;
 import com.istudyenglish.mobilebackend.domain.Education.SimilarAnswer;
 import com.istudyenglish.mobilebackend.port.in.answer.AnswerUseCase;
-import com.istudyenglish.mobilebackend.port.in.answer.SimilarAnswerUseCase;
+import com.istudyenglish.mobilebackend.port.in.similarAnswer.SimilarAnswerUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

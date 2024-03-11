@@ -1,10 +1,10 @@
-package com.istudyenglish.mobilebackend.application.answer;
+package com.istudyenglish.mobilebackend.application.similarAnswer;
 
-import com.istudyenglish.mobilebackend.adapter.answer.SimilarAnswersDAO;
+import com.istudyenglish.mobilebackend.adapter.similarAnswer.SimilarAnswerDAO;
 import com.istudyenglish.mobilebackend.domain.Education.Answer;
 import com.istudyenglish.mobilebackend.domain.Education.SimilarAnswer;
-import com.istudyenglish.mobilebackend.port.in.answer.SimilarAnswerUseCase;
-import com.istudyenglish.mobilebackend.port.out.answer.SimilarAnswersDBport;
+import com.istudyenglish.mobilebackend.port.in.similarAnswer.SimilarAnswerUseCase;
+import com.istudyenglish.mobilebackend.port.out.similarAnswer.SimilarAnswersDBport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +16,7 @@ public class SimilarAnswerUseCaseImpl implements SimilarAnswerUseCase{
     SimilarAnswersDBport similarAnswersDBport;
 
     @Autowired
-    public SimilarAnswerUseCaseImpl(SimilarAnswersDAO similarAnswersDBport) {
+    public SimilarAnswerUseCaseImpl(SimilarAnswerDAO similarAnswersDBport) {
         this.similarAnswersDBport = similarAnswersDBport;
     }
 

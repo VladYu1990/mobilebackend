@@ -1,8 +1,8 @@
-package com.istudyenglish.mobilebackend.adapter.answer;
+package com.istudyenglish.mobilebackend.adapter.similarAnswer;
 
 import com.istudyenglish.mobilebackend.domain.Education.Answer;
 import com.istudyenglish.mobilebackend.domain.Education.SimilarAnswer;
-import com.istudyenglish.mobilebackend.port.out.answer.SimilarAnswersDBport;
+import com.istudyenglish.mobilebackend.port.out.similarAnswer.SimilarAnswersDBport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -10,16 +10,16 @@ import org.springframework.stereotype.Component;
 import java.util.Collection;
 
 @Component
-public class SimilarAnswersDAO implements SimilarAnswersDBport {
+public class SimilarAnswerDAO implements SimilarAnswersDBport {
 
     JdbcTemplate jdbcTemplate;
 
-    AnswersSimilarMapper answersSimilarMapper;
+    SimilarAnswerMapper similarAnswerMapper;
 
     @Autowired
-    public SimilarAnswersDAO(JdbcTemplate jdbcTemplate, AnswersSimilarMapper answersSimilarMapper) {
+    public SimilarAnswerDAO(JdbcTemplate jdbcTemplate, SimilarAnswerMapper similarAnswerMapper) {
         this.jdbcTemplate = jdbcTemplate;
-        this.answersSimilarMapper = answersSimilarMapper;
+        this.similarAnswerMapper = similarAnswerMapper;
     }
 
     public Collection<SimilarAnswer> getSimilar(Answer answer, int count) {
@@ -29,7 +29,7 @@ public class SimilarAnswersDAO implements SimilarAnswersDBport {
                 "order by similarity_weight desc " +
                 "limit " + count + ";";
 
-        return jdbcTemplate.query(sql,answersSimilarMapper);
+        return jdbcTemplate.query(sql, similarAnswerMapper);
     }
 
     public void saveSimilar(Collection<SimilarAnswer> similarAnswerCollection) {

@@ -1,4 +1,4 @@
-package com.istudyenglish.mobilebackend.port.out.answer;
+package com.istudyenglish.mobilebackend.port.out.similarAnswer;
 
 import com.istudyenglish.mobilebackend.domain.Education.Answer;
 import com.istudyenglish.mobilebackend.domain.Education.SimilarAnswer;

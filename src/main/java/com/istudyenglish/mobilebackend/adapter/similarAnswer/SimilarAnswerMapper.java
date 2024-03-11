@@ -1,4 +1,4 @@
-package com.istudyenglish.mobilebackend.adapter.answer;
+package com.istudyenglish.mobilebackend.adapter.similarAnswer;
 
 import com.istudyenglish.mobilebackend.domain.Education.SimilarAnswer;
 import org.springframework.jdbc.core.RowMapper;
@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 @Component
-public class AnswersSimilarMapper implements RowMapper<SimilarAnswer> {
+public class SimilarAnswerMapper implements RowMapper<SimilarAnswer> {
 
     public SimilarAnswer mapRow(ResultSet resultSet, int rowNum) throws SQLException {
 
