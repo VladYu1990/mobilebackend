@@ -2,11 +2,15 @@ package com.istudyenglish.mobilebackend.port.out.exercise;
 
 import com.istudyenglish.mobilebackend.domain.Education.Exercise;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 public interface ExerciseDBPort {
 
     Exercise get(UUID uuid);
+    List<Exercise> get(List<String> strings);
     void save(Exercise exercise);
     void update(Exercise exercise);
     void delete(Exercise exercise);

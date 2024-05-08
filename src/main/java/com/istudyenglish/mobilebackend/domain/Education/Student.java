@@ -4,6 +4,7 @@ package com.istudyenglish.mobilebackend.domain.Education;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Synchronized;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -43,6 +44,12 @@ public class Student {
      * Дата создания студента
      */
     private Instant dateCreated;
+    /**
+     * Дата создания студента
+     */
+    private int countBoughtExercise;
+
+
 
     public void setStudentFullName(String studentFullName) {
         this.studentFullName = studentFullName;
@@ -55,5 +62,17 @@ public class Student {
         else {
             return false;
         }
+    }
+
+    @Synchronized
+    public void increaseToCountBoughtExercise(int count){
+        this.countBoughtExercise = this.countBoughtExercise + count;
+    }
+
+    @Synchronized
+    public void decreaseByCountBoughtExercise(int count){
+        this.countBoughtExercise= this.countBoughtExercise - count;
+        //студент не может брать в долг и не может быть нам должен
+        if(this.countBoughtExercise<0){this.countBoughtExercise=0;}
     }
 }

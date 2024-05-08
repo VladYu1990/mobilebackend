@@ -11,7 +11,7 @@ public interface UserDBPort {
 
     User getByUUID(UUID uuid) throws NullPointerException;
 
-    User getByLogin(String login) throws NullPointerException;
+    User getByLoginAndPassword(String login,String password) throws NullPointerException;
 
     void update(User user);
 }

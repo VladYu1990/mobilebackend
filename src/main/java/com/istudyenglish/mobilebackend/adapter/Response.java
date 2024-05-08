@@ -25,4 +25,9 @@ public class Response {
     public Object getResult_object() {
         return result_object;
     }
+
+    @Override
+    public String toString(){
+        return request_status + ";" + result_object.toString();
+    }
 }

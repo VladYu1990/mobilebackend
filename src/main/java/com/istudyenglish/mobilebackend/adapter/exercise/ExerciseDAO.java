@@ -2,13 +2,18 @@ package com.istudyenglish.mobilebackend.adapter.exercise;
 
 import com.istudyenglish.mobilebackend.domain.Education.Exercise;
 import com.istudyenglish.mobilebackend.port.out.exercise.ExerciseDBPort;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @Component
+@Log4j2
 public class ExerciseDAO implements ExerciseDBPort {
 
     ExerciseMapper exerciseMapper;
@@ -25,6 +30,24 @@ public class ExerciseDAO implements ExerciseDBPort {
 
 
         return jdbcTemplate.query(sql,exerciseMapper).get(0);
+    }
+
+    public List<Exercise> get(List<String> strings) {
+        StringBuilder builder = new StringBuilder();
+        builder.append("select * from exercises where value in ('" + strings.get(0) + "') ");
+        for (int i=1;i+1<=strings.size();i++) {
+            builder.append("or value in ('" + strings.get(i) + "') ");
+        }
+
+        builder.append("union all select * from exercises where translation in ('" + strings.get(0) + "') ");
+        for (int i=1;i+1<=strings.size();i++) {
+            builder.append("or translation in ('" + strings.get(i) + "') ");
+        }
+
+
+        String sql = builder.toString();
+        log.info(sql);
+        return jdbcTemplate.query(sql,exerciseMapper);
     }
 
 

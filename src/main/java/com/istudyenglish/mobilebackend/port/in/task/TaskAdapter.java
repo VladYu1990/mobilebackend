@@ -5,9 +5,11 @@ import com.istudyenglish.mobilebackend.application.CustomException.CustomExcepti
 import com.istudyenglish.mobilebackend.domain.Education.Task.Task;
 import java.time.Instant;
 import java.util.Collection;
+import java.util.List;
 
 public interface TaskAdapter {
     void create(String studentCode, String exerciseUUID, Instant time) throws CustomException;
+    void create(String studentCode, List<String> strings, Instant time) throws CustomException;
 
     Collection<TaskDTO> getNextTask(String studentCode, int amountTask,int amountAnswers, Instant time) throws CustomException;
 

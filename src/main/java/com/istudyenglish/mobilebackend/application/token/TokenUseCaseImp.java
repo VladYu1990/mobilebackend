@@ -20,7 +20,9 @@ public class TokenUseCaseImp implements TokenUseCase {
     }
 
     public void create(UUID userUUID) {
-        getByUserUUID(userUUID);
+        killTokensForUser(userUUID);
+        Token token = new Token(userUUID);
+        tokenDBPort.create(token);
     }
 
     public Token get(UUID uuid) throws CustomException {
@@ -33,19 +35,24 @@ public class TokenUseCaseImp implements TokenUseCase {
             token = tokenDBPort.getTokenAliveByUserUUID(userUUID);
         }
         catch (CustomException customException){
+            //todo очень сомнительное решение, нужно передумать
             token = new Token(userUUID);
             tokenDBPort.create(token);
         }
         return token;
     }
 
+    //todo перенести в токен
     public boolean isAlive(Token token) {
         return token.checkTokenIsALife();
     }
 
-    public void killOldTokenForUser(UUID userUUID) {
+    public void killTokensForUser(UUID userUUID) {
         try {
-            Collection<Token> tokens = tokenDBPort.getTokensByUserUUID(userUUID);
+            Collection<Token> tokens = tokenDBPort.getTokensAliveByUserUUID(userUUID);
+            for(Token t:tokens){
+                t.kill();
+            }
             tokenDBPort.killTokens(tokens);
         }
         catch (CustomException e) {

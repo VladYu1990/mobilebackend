@@ -28,9 +28,10 @@ public class UserDAO implements UserDBPort {
 
     public void create(User user) {
         String sql = "INSERT INTO users (uuid,login,password,phone_number) " +
-                "VALUES (" + user.getUuid() + ",'" + user.getLogin() + "','" + user.getPassword()+ "','" +
+                "VALUES ('" + user.getUuid() + "','" + user.getLogin() + "','" + user.getPassword()+ "','" +
                 user.getPhoneNumber() + "');";
         jdbcTemplate.update(sql);
+        log.info(sql);
     }
 
     public User getByUUID(UUID uuid) throws NullPointerException{
@@ -40,11 +41,14 @@ public class UserDAO implements UserDBPort {
         return jdbcTemplate.query(sql,userMapper).get(0);
     }
 
-    public User getByLogin(String login) throws NullPointerException{
+    public User getByLoginAndPassword(String login,String password) throws NullPointerException{
         String sql = "select * from users " +
-                    "where login in ('" + login + "');";
+                    "where login in ('" + login + "')" +
+                "and password in ('" + password + "');";
 
+        log.info(sql);
         return jdbcTemplate.query(sql,userMapper).get(0);
+
     }
 
 

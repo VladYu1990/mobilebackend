@@ -5,6 +5,7 @@ import com.istudyenglish.mobilebackend.application.user.UserUseCaseImpl;
 import com.istudyenglish.mobilebackend.domain.Education.Languages;
 import com.istudyenglish.mobilebackend.port.out.Student.StudentDBPort;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import com.istudyenglish.mobilebackend.domain.Education.Student;
 import com.istudyenglish.mobilebackend.port.in.student.StudentUseCase;
@@ -12,7 +13,7 @@ import com.istudyenglish.mobilebackend.port.in.student.StudentUseCase;
 import java.time.Instant;
 import java.util.UUID;
 
-@Service
+@Component
 public class StudentUseCaseImpl implements StudentUseCase{
 
     StudentDBPort studentDAO;
@@ -43,7 +44,7 @@ public class StudentUseCaseImpl implements StudentUseCase{
 
     public Student get(UUID studentUUID) {
 
-        return null;
+        return studentDAO.get(studentUUID);
     }
 
     public void rename(Student student,String newFullName) {

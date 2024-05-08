@@ -18,8 +18,8 @@ public class TokenMapper implements RowMapper<Token> {
 
         return Token.builder().
                 token(UUID.fromString(resultSet.getString("uuid"))).
-                dateCreate(Instant.parse(resultSet.getString("date_create"))).
-                dateDeath(Instant.parse(resultSet.getString("date_death"))).
+                dateCreate(resultSet.getTimestamp("date_create").toInstant()).
+                dateDeath(resultSet.getTimestamp("date_death").toInstant()).
                 userUUID(UUID.fromString(resultSet.getString("user_uuid"))).
                 build();
     }

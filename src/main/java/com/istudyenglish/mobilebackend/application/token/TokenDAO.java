@@ -9,12 +9,14 @@ import com.istudyenglish.mobilebackend.port.out.token.TokenDBPort;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -32,7 +34,7 @@ public class TokenDAO implements TokenDBPort {
 
     public void create(Token token) {
         String sql = "INSERT INTO tokens (uuid,date_create,date_death,user_uuid) " +
-                "VALUES (" + token.getToken() + ",'" +
+                "VALUES ('" + token.getToken() + "','" +
                 token.getDateCreate() + "','" +
                 token.getDateDeath()+ "','" +
                 token.getUserUUID() + "');";
@@ -42,7 +44,7 @@ public class TokenDAO implements TokenDBPort {
     public Token get(UUID uuid) throws CustomException{
         try{
             String sql = "select * from tokens " +
-                    "where uuid in ('" + uuid + "');";
+                    "where uuid in ('" + uuid + "') order by date_death desc limit 1;";
 
             return jdbcTemplate.query(sql,tokenMapper).get(0);
         }
@@ -52,17 +54,23 @@ public class TokenDAO implements TokenDBPort {
     }
 
     public Token getTokenAliveByUserUUID(UUID userUUID) throws CustomException {
-        try{
-            String sql = "select * from tokens " +
-                    "where user_uuid in ('" + userUUID + "')" +
-                    "and date_death >= '" + Instant.now() + "';";
+        return getTokensAliveByUserUUID(userUUID).get(0);
+    }
 
-            return jdbcTemplate.query(sql,tokenMapper).get(0);
+    public ArrayList<Token> getTokensAliveByUserUUID(UUID userUUID) throws CustomException {
+        String sql = "select * from tokens " +
+                "where user_uuid in ('" + userUUID + "') " +
+                "and date_death >= '" + Instant.now() + "';";
+        List<Token> tokenList = new ArrayList<>();
+        try{
+            tokenList = jdbcTemplate.query(sql,tokenMapper);
         }
-        catch (Exception e){
+        catch (Exception e){}
+
+        if(tokenList.size() == 0) {
             throw new CustomException(CustomExceptionCode.TokenDoNotExist);
         }
-
+        return (ArrayList<Token>) tokenList;
     }
 
     public Collection<Token> getTokensByUserUUID(UUID userUUID) throws CustomException{

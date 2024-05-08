@@ -3,11 +3,14 @@ package com.istudyenglish.mobilebackend.port.in.exercise;
 import com.istudyenglish.mobilebackend.domain.Education.Exercise;
 import com.istudyenglish.mobilebackend.domain.dictionary.Source;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 public interface ExerciseUseCase {
 
     Exercise get(UUID uuid);
+    List<Exercise> get(List<String> collection);
     void create(Source source);
     void delete(Exercise exercise);
 }

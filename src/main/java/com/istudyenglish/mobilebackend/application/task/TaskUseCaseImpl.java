@@ -48,6 +48,7 @@ public class TaskUseCaseImpl implements TaskUseCase {
                     taskCreator.create(
                             student.getUuid(),i.getUuid()));
         }
+        //Todo добавить проверку на остаток доступных слов студенту
         taskDAO.save(taskCollection,instant);
     }
     public Task get(UUID taskUUID){

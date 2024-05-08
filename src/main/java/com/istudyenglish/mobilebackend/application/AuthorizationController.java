@@ -57,7 +57,7 @@ public class AuthorizationController {
             tokenValidator.check(headers.get("token"));
             User user;
             user = tokenConvertor.getUser(headers.get("token"));
-            tokenUseCase.killOldTokenForUser(user.getUuid());
+            tokenUseCase.killTokensForUser(user.getUuid());
             return new Response("ok","");
 
         }

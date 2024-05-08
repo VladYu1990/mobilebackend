@@ -10,5 +10,5 @@ public interface TokenUseCase {
     Token get(UUID uuid) throws CustomException;
     Token getByUserUUID(UUID userUUID);
     boolean isAlive(Token token);
-    void killOldTokenForUser(UUID userUUID);
+    void killTokensForUser(UUID userUUID);
 }

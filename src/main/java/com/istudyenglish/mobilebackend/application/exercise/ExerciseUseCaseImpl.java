@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.istudyenglish.mobilebackend.domain.Education.Exercise;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -26,6 +28,11 @@ public class ExerciseUseCaseImpl implements ExerciseUseCase {
     public Exercise get(UUID uuid){
 
         return exerciseDBport.get(uuid);
+    }
+
+    public List<Exercise> get(List<String> strings){
+
+        return exerciseDBport.get(strings);
     }
 
     public void create(Source source) {

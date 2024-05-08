@@ -13,7 +13,6 @@ import com.istudyenglish.mobilebackend.port.in.user.UserUseCase;
 import java.util.UUID;
 
 @Service
-@Log4j2
 public class UserUseCaseImpl implements UserUseCase {
 
     UserDBPort userDAO;
@@ -33,31 +32,22 @@ public class UserUseCaseImpl implements UserUseCase {
     }
 
     public User logIn(String login,String password) throws CustomException {
-
-        User user = new User();
         try {
-            user = userDAO.getByLogin(login);
-            if (!user.checkPassword(password)) {
-                throw new CustomException(CustomExceptionCode.PasswordDoNotExist);
-            }
-            return user;
+            return userDAO.getByLoginAndPassword(login,password);
         }
         catch (NullPointerException npe){
-                log.info(npe.getMessage());
-                throw new CustomException(CustomExceptionCode.LoginDoNotExist);
+                throw new CustomException(CustomExceptionCode.LoginAndPasswordDoNotExist);
             }
         }
 
 
-    @Override
     public User getByUUID(UUID userUUID) throws CustomException {
         try {
             User user = userDAO.getByUUID(userUUID);
             return user;
         }
         catch (NullPointerException npe){
-            log.info(npe.getMessage());
-            throw new CustomException(CustomExceptionCode.LoginDoNotExist);
+            throw new CustomException(CustomExceptionCode.LoginAndPasswordDoNotExist);
         }
     }
 

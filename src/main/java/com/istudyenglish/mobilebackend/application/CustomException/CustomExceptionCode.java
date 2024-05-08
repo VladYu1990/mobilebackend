@@ -1,8 +1,10 @@
 package com.istudyenglish.mobilebackend.application.CustomException;
 
 public enum CustomExceptionCode {
+    OtherErrors,
+    DBErrors,
     LoginExist,
-    LoginDoNotExist,
+    LoginAndPasswordDoNotExist,
     PasswordDoNotExist,
     PasswordDoNotValid,
     TokenIsDead,

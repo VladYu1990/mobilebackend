@@ -3,6 +3,7 @@ package com.istudyenglish.mobilebackend.domain.Autorisation;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -10,6 +11,7 @@ import java.util.UUID;
 import static java.time.temporal.ChronoUnit.DAYS;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Builder
 public class Token {
@@ -35,8 +37,7 @@ public class Token {
         this.token = UUID.randomUUID();
         this.dateCreate = Instant.now();
         Instant instant = Instant.now();
-        instant.plus(30, DAYS);
-        this.dateDeath = instant;
+        this.dateDeath = instant.plus(30, DAYS);
 
         this.userUUID = userUUID;
 
@@ -48,5 +49,15 @@ public class Token {
         } else {
             return false;
         }
+    }
+
+    public void kill(){
+        dateDeath = Instant.now();
+    }
+
+    @Override
+    public String toString(){
+
+        return token + dateDeath.toString();
     }
 }
