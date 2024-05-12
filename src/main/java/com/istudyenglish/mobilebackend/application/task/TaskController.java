@@ -1,6 +1,7 @@
 package com.istudyenglish.mobilebackend.application.task;
 
 import com.istudyenglish.mobilebackend.adapter.Response;
+import com.istudyenglish.mobilebackend.adapter.Validators.TokenExistStudentValidator;
 import com.istudyenglish.mobilebackend.adapter.Validators.TokenValidator;
 import com.istudyenglish.mobilebackend.adapter.task.ConvertorToTaskDTO;
 import com.istudyenglish.mobilebackend.adapter.task.TaskDTO;
@@ -23,38 +24,40 @@ import java.util.Map;
 public class TaskController {
 
     TaskAdapter taskAdapter;
-    TaskUseCase taskUseCase;
     ConvertorToTaskDTO convertorToTaskDTO;
     TokenValidator tokenValidator;
+    TokenExistStudentValidator tokenExistStudentValidator;
 
     @Autowired
-    public TaskController(TaskAdapterImpl taskAdapter, ConvertorToTaskDTO convertorToTaskDTO) {
+    public TaskController(TaskAdapter taskAdapter, ConvertorToTaskDTO convertorToTaskDTO, TokenValidator tokenValidator, TokenExistStudentValidator tokenExistStudentValidator) {
         this.taskAdapter = taskAdapter;
         this.convertorToTaskDTO = convertorToTaskDTO;
+        this.tokenValidator = tokenValidator;
+        this.tokenExistStudentValidator = tokenExistStudentValidator;
     }
 
     @PostMapping("/create")
     public Response create(@RequestHeader Map<String, String> headers,
                        @RequestParam(defaultValue = "") String time,
-                           @RequestParam String words) throws Exception {
+                           @RequestParam String words){
 
-        log.info(words);
         try {
             tokenValidator.check(headers.get("token"));
+            tokenExistStudentValidator.check(
+                    headers.get("token"),
+                    headers.get("student"));
+
             Instant instant = Instant.now();
-            if (!time.equals("")) {
+            if (!time.isEmpty()) {
                 Instant.parse(time);
             }
-
-            log.info(headers.toString());
 
             List<String> wordsList = new ArrayList<>();
             wordsList = List.of(words.replace(">","").replace("<","").split(","));
 
             taskAdapter.create(
                     headers.get("token"),
-                    wordsList,
-                    instant);
+                    wordsList);
             return new Response("ok");
 
         }

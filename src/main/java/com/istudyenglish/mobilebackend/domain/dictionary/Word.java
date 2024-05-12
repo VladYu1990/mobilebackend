@@ -8,11 +8,25 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Word extends Source{
-    
+public class Word{
+
+    /**
+     * id слова
+     */
+    private int id;
+    /**
+     * написание на английском языке
+     */
+    String eng;
+    /**
+     * написание на русском языке
+     */
+    String rus;
+    /**
+     * часть речи
+     */
     private PartsOfSpeech partsOfSpeech;
 
-    private TypesOfSource typesOfSource;
 
 
 }

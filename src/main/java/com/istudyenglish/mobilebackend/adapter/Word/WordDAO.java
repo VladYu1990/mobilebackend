@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -31,22 +32,28 @@ public class WordDAO implements WordDBPort {
 
 
     @Override
-    public void create(Word word) {
+    public List<Word> get(List<String> valueOrTranslates) {
 
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("('" + valueOrTranslates.get(0));
+
+        for(int i =1; i<valueOrTranslates.size();i++){
+            stringBuilder.append("','" + i);
+        }
+
+        stringBuilder.append("')");
+
+
+
+        String sql =
+                " select * from word " +
+                " where eng_test in " + stringBuilder.toString() +
+                " union all " +
+                " select * from word " +
+                " where rus_text in " + stringBuilder.toString();
+
+        return jdbcTemplate.query(sql, wordMapper);
     }
 
-    @Override
-    public User get(UUID uuid) throws Exception {
-        return null;
-    }
-
-    @Override
-    public User get(String code) throws Exception {
-        return null;
-    }
-
-    @Override
-    public void update(Word word) {
-
-    }
 }

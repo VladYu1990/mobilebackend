@@ -26,8 +26,7 @@ import java.util.UUID;
  */
 public interface TaskUseCase {
 
-void createTask(Student student, Exercise exercise, Instant instant);
-void createTasks(Student student,Collection<Exercise> exerciseList, Instant instant);
+void createTasks(Student student,Collection<Exercise> exerciseList);
 Task get(UUID uuid);
 Collection<Task> getNextTasks(Student student,int amount,Instant instant);
 void checkStudentAffiliation(Task task,UUID studentUUID) throws CustomException;

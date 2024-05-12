@@ -35,13 +35,8 @@ public class TaskUseCaseImpl implements TaskUseCase {
         this.taskAnswerChecker = taskAnswerChecker;
     }
 
-     public void createTask(Student student, Exercise exercise,Instant instant){
-        Collection<Exercise> exerciseList = new ArrayList<Exercise>();
-        exerciseList.add(exercise);
-        createTasks(student,exerciseList,instant);
-    }
 
-    public void createTasks(Student student, Collection<Exercise> exerciseList,Instant instant) {
+    public void createTasks(Student student, Collection<Exercise> exerciseList) {
         Collection<Task> taskCollection = new ArrayList<Task>();
         for(Exercise i:exerciseList){
             taskCollection.add(
@@ -49,7 +44,7 @@ public class TaskUseCaseImpl implements TaskUseCase {
                             student.getUuid(),i.getUuid()));
         }
         //Todo добавить проверку на остаток доступных слов студенту
-        taskDAO.save(taskCollection,instant);
+        taskDAO.save(taskCollection);
     }
     public Task get(UUID taskUUID){
         return taskDAO.get(taskUUID);

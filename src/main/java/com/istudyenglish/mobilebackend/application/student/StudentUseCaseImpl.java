@@ -3,10 +3,9 @@ package com.istudyenglish.mobilebackend.application.student;
 import com.istudyenglish.mobilebackend.adapter.student.StudentDAO;
 import com.istudyenglish.mobilebackend.application.user.UserUseCaseImpl;
 import com.istudyenglish.mobilebackend.domain.Education.Languages;
-import com.istudyenglish.mobilebackend.port.out.Student.StudentDBPort;
+import com.istudyenglish.mobilebackend.port.out.student.StudentDBPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import com.istudyenglish.mobilebackend.domain.Education.Student;
 import com.istudyenglish.mobilebackend.port.in.student.StudentUseCase;
 

@@ -13,8 +13,7 @@ public interface TaskDBPort {
 
     Collection<Task> getNext(Student student,Instant instant);
 
-    void save(Task task, Instant instant);
-    void save(Collection<Task> taskCollection, Instant instant);
+    void save(Collection<Task> taskCollection);
 
     void update(Task task);
     void update(Collection<Task> taskCollection);

@@ -11,7 +11,10 @@ public interface ExerciseDBPort {
 
     Exercise get(UUID uuid);
     List<Exercise> get(List<String> strings);
+    List<Exercise> getFromWordUUID(List<String> collection);
     void save(Exercise exercise);
     void update(Exercise exercise);
     void delete(Exercise exercise);
+
+
 }

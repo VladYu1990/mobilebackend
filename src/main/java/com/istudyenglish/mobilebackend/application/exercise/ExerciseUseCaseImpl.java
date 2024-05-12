@@ -35,6 +35,11 @@ public class ExerciseUseCaseImpl implements ExerciseUseCase {
         return exerciseDBport.get(strings);
     }
 
+    @Override
+    public List<Exercise> getFromWordUUID(List<String> collection) {
+        return exerciseDBport.getFromWordUUID(collection);
+    }
+
     public void create(Source source) {
         exerciseCreator.create(source);
     }
@@ -42,5 +47,9 @@ public class ExerciseUseCaseImpl implements ExerciseUseCase {
     public void delete(Exercise exercise) {
         exerciseDBport.delete(exercise);
     }
+
+
+
+    
 
 }

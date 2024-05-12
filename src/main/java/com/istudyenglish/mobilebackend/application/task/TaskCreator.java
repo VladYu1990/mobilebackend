@@ -13,53 +13,20 @@ import java.util.UUID;
 @Component
 public class TaskCreator {
 
-    private Exercise exercise;
-    private UUID studentUUID;
-    private Instant instantCreate;
-    private ExerciseUseCaseImpl exerciseUseCaseImpl;
-
-    @Autowired
-    public TaskCreator(ExerciseUseCaseImpl exerciseUseCase) {
-        this.exerciseUseCaseImpl = exerciseUseCase;
-    }
-
     public Task create(UUID studentUUID, UUID exerciseUUID) {
-        this.studentUUID = studentUUID;
-        setExercise(exerciseUUID);
-        this.instantCreate = Instant.now();
-
-
-        return createTask();
-    }
-
-    public Task create(UUID studentUUID, UUID exerciseUUID, Instant instant) {
-        this.studentUUID = studentUUID;
-        this.instantCreate = instant;
-
-        return createTask();
-    }
-
-    public Task create(Student student, Exercise exercise,Instant instant) {
-        this.studentUUID = student.getUuid();
-        this.instantCreate = instant;
-        return createTask();
-    }
-
-    private void setExercise(UUID exerciseUUID) {
-        this.exercise = exerciseUseCaseImpl.get(exerciseUUID);
-    }
-
-
-    private Task createTask(){
-
         return Task.builder().
                 uuid(UUID.randomUUID()).
-                exerciseUUID(exercise.getUuid()).
+                exerciseUUID(exerciseUUID).
                 studentUUID(studentUUID).
                 nextRepetition(Instant.now()).
                 lastRepetition(Instant.now()).
-                status(TaskStatus.NOT_READY).
-                countRightResponses(0)
-                .build();
+                status(TaskStatus.READY).
+                countRightResponses(0).
+                build();
     }
+
+    public Task create(Student student, Exercise exercise) {
+        return create(student.getUuid(),exercise.getUuid());
+    }
+
 }

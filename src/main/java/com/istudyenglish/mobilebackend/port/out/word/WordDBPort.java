@@ -3,15 +3,12 @@ package com.istudyenglish.mobilebackend.port.out.word;
 import com.istudyenglish.mobilebackend.domain.Autorisation.User;
 import com.istudyenglish.mobilebackend.domain.dictionary.Word;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface WordDBPort {
 
-    void create(Word word);
 
-    User get(UUID uuid) throws Exception;
+    List<Word> get(List<String> valueOrTranslate);
 
-    User get(String code) throws Exception;
-
-    void update(Word word);
 }

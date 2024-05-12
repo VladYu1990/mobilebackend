@@ -33,23 +33,28 @@ public class ExerciseDAO implements ExerciseDBPort {
     }
 
     public List<Exercise> get(List<String> strings) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("select * from exercises where value in ('" + strings.get(0) + "') ");
-        for (int i=1;i+1<=strings.size();i++) {
-            builder.append("or value in ('" + strings.get(i) + "') ");
-        }
-
-        builder.append("union all select * from exercises where translation in ('" + strings.get(0) + "') ");
-        for (int i=1;i+1<=strings.size();i++) {
-            builder.append("or translation in ('" + strings.get(i) + "') ");
-        }
-
-
-        String sql = builder.toString();
-        log.info(sql);
-        return jdbcTemplate.query(sql,exerciseMapper);
+       //todo
+        return null;
     }
 
+    @Override
+    public List<Exercise> getFromWordUUID(List<String> collection) {
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("('" + collection.get(0));
+
+        for(int i =1; i<collection.size();i++){
+            stringBuilder.append("','" + i);
+        }
+
+        stringBuilder.append("')");
+
+        String sql = "select * from exercises " +
+                "where source_uuid in " + stringBuilder.toString();
+
+        return jdbcTemplate.query(sql,exerciseMapper);
+    }
 
     public void save(Exercise exercise) {
 

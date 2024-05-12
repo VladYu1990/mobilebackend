@@ -8,8 +8,7 @@ import java.util.Collection;
 import java.util.List;
 
 public interface TaskAdapter {
-    void create(String studentCode, String exerciseUUID, Instant time) throws CustomException;
-    void create(String studentCode, List<String> strings, Instant time) throws CustomException;
+    void create(String studentCode, List<String> strings) throws CustomException;
 
     Collection<TaskDTO> getNextTask(String studentCode, int amountTask,int amountAnswers, Instant time) throws CustomException;
 

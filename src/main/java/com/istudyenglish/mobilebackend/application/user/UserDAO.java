@@ -1,13 +1,12 @@
 package com.istudyenglish.mobilebackend.application.user;
 
 import com.istudyenglish.mobilebackend.domain.Autorisation.User;
-import com.istudyenglish.mobilebackend.port.out.User.UserDBPort;
+import com.istudyenglish.mobilebackend.port.out.user.UserDBPort;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import java.time.Instant;
 import java.util.UUID;
 
 @Component

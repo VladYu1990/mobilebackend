@@ -1,4 +1,4 @@
-package com.istudyenglish.mobilebackend.port.out.User;
+package com.istudyenglish.mobilebackend.port.out.user;
 
 import com.istudyenglish.mobilebackend.application.CustomException.CustomException;
 import com.istudyenglish.mobilebackend.domain.Autorisation.User;

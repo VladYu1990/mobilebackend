@@ -11,6 +11,7 @@ public interface ExerciseUseCase {
 
     Exercise get(UUID uuid);
     List<Exercise> get(List<String> collection);
+    List<Exercise> getFromWordUUID(List<String> collection);
     void create(Source source);
     void delete(Exercise exercise);
 }

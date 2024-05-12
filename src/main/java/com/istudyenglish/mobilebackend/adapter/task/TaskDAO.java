@@ -49,8 +49,7 @@ public class TaskDAO implements TaskDBPort {
         return jdbcTemplate.query(sql, taskMapper);
     }
 
-
-    public void save(Collection<Task> taskCollection, Instant instant) {
+    public void save(Collection<Task> taskCollection) {
 
         StringBuilder stringBuilder = new StringBuilder();
         for (Task i : taskCollection) {
@@ -65,18 +64,6 @@ public class TaskDAO implements TaskDBPort {
                             + i.getCountRightResponses() + ");");
         }
         jdbcTemplate.update(stringBuilder.toString());
-    }
-    public void save(Task task, Instant instant) {
-        String sql =
-                    "INSERT INTO tasks VALUES(\n" +
-                    "'" + task.getExerciseUUID().toString() + "',\n" +
-                    "'" + task.getExerciseUUID().toString() + "',\n" +
-                    "'" + task.getStudentUUID() + "',\n" +
-                    "'" + task.getNextRepetition().toString() + "',\n" +
-                    "'" + task.getLastRepetition().toString() + "',\n" +
-                    "'" + task.getStatus().toString() + "',\n" +
-                     + task.getCountRightResponses() + ");";
-        jdbcTemplate.update(sql);
     }
 
 

@@ -1,7 +1,7 @@
 package com.istudyenglish.mobilebackend.adapter.student;
 
 import com.istudyenglish.mobilebackend.domain.Education.Student;
-import com.istudyenglish.mobilebackend.port.out.Student.StudentDBPort;
+import com.istudyenglish.mobilebackend.port.out.student.StudentDBPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package com.istudyenglish.mobilebackend.port.out.Student;
+package com.istudyenglish.mobilebackend.port.out.student;
 
 import com.istudyenglish.mobilebackend.domain.Education.Student;
 

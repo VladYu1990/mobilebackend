@@ -7,8 +7,10 @@ public enum CustomExceptionCode {
     LoginAndPasswordDoNotExist,
     PasswordDoNotExist,
     PasswordDoNotValid,
+    TokenDoNotValid,
     TokenIsDead,
     TokenDoNotExist,
+    TokenDoNotExistForStudent,
     AssignmentDoesNotBelongToStudent;
 
 
