@@ -1,6 +1,5 @@
 package com.istudyenglish.mobilebackend.application.Source;
 
-import com.istudyenglish.mobilebackend.domain.dictionary.Source;
 import com.istudyenglish.mobilebackend.port.in.source.SourceUseCase;
 import com.istudyenglish.mobilebackend.port.out.source.SourceDBPort;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.istudyenglish.mobilebackend.domain.dictionary;
+package com.istudyenglish.mobilebackend.dictionary.domain;
 
 /**
  * Типы источников для упражнения

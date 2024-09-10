@@ -1,6 +1,5 @@
 package com.istudyenglish.mobilebackend.adapter.task;
 
-import com.istudyenglish.mobilebackend.DataSource;
 import com.istudyenglish.mobilebackend.domain.Education.Student;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;

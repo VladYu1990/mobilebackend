@@ -1,3 +1,43 @@
+NEW
+
+
+create table words(
+uuid uuid,
+value text,
+translate text,
+value_language text,
+translate_language text,
+part_of_speech_code integer,
+CONSTRAINT only_one_uuid_word UNIQUE (uuid)
+);
+
+
+create table similarWord(
+uuid_word uuid,
+uuid_similar_words text,
+CONSTRAINT only_one_uuid UNIQUE (uuid_word)
+);
+
+
+
+create table tasks(
+uuid text,
+exercise_UUID text,
+student_uuid text,
+next_Repetition timestamp,
+last_Repetition timestamp,
+status text,
+count_Right_Responses int
+);
+
+
+
+
+
+
+===================================================
+OLD
+
 create table tasks(
 uuid text,
 exercise_UUID text,

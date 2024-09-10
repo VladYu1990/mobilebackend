@@ -8,7 +8,7 @@ import com.istudyenglish.mobilebackend.application.word.WordUseCaseImpl;
 import com.istudyenglish.mobilebackend.domain.Education.Exercise;
 import com.istudyenglish.mobilebackend.domain.Education.Student;
 import com.istudyenglish.mobilebackend.domain.Education.Task.Task;
-import com.istudyenglish.mobilebackend.domain.dictionary.Word;
+import com.istudyenglish.mobilebackend.dictionary.domain.Word;
 import com.istudyenglish.mobilebackend.port.in.exercise.ExerciseUseCase;
 import com.istudyenglish.mobilebackend.port.in.student.StudentUseCase;
 import com.istudyenglish.mobilebackend.port.in.task.TaskAdapter;
