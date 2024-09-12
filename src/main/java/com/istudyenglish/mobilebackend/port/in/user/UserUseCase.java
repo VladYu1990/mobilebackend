@@ -2,7 +2,7 @@ package com.istudyenglish.mobilebackend.port.in.user;
 
 
 import com.istudyenglish.mobilebackend.application.CustomException.CustomException;
-import com.istudyenglish.mobilebackend.domain.Autorisation.User;
+import com.istudyenglish.mobilebackend.userService.domain.User;
 
 import java.util.UUID;
 

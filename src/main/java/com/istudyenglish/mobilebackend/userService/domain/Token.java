@@ -1,4 +1,4 @@
-package com.istudyenglish.mobilebackend.domain.Autorisation;
+package com.istudyenglish.mobilebackend.userService.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

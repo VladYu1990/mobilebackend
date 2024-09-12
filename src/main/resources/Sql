@@ -1,4 +1,4 @@
-NEW
+NEW 09.2024
 
 
 create table words(
@@ -30,7 +30,16 @@ status text,
 count_Right_Responses int
 );
 
-
+create table user(
+uuid text,
+login text,
+password text,
+phone_number text,
+token text,
+date_create timestamp,
+date_of_death_token timestamp,
+CONSTRAINT only_one_user_on_login UNIQUE (uuid)
+);
 
 
 

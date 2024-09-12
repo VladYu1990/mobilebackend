@@ -1,12 +1,11 @@
 package com.istudyenglish.mobilebackend.application.token;
 
-import com.istudyenglish.mobilebackend.domain.Autorisation.Token;
+import com.istudyenglish.mobilebackend.userService.domain.Token;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.Instant;
 import java.util.UUID;
 
 @Component

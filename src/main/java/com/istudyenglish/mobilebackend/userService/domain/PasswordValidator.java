@@ -1,6 +1,5 @@
-package com.istudyenglish.mobilebackend.domain.Autorisation;
+package com.istudyenglish.mobilebackend.userService.domain;
 
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 

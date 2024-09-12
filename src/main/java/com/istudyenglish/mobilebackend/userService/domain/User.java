@@ -1,14 +1,9 @@
-package com.istudyenglish.mobilebackend.domain.Autorisation;
+package com.istudyenglish.mobilebackend.userService.domain;
 
-import com.istudyenglish.mobilebackend.application.CustomException.CustomException;
-import com.istudyenglish.mobilebackend.application.CustomException.CustomExceptionCode;
 import lombok.*;
 
 import java.time.Instant;
-import java.time.temporal.TemporalUnit;
 import java.util.UUID;
-
-import static java.time.temporal.ChronoUnit.DAYS;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,6 +26,14 @@ public class User {
      * Номер телефона пользователя
      */
     private String phoneNumber;
+    private UUID token;
+    private Instant dateOfDeathToken;
+
+    public User(String login, String password) {
+        this.uuid = UUID.randomUUID();
+        this.login = login;
+        this.password = password;
+    }
 
     public User(String login, String password, String phoneNumber) {
         this.uuid = UUID.randomUUID();
@@ -50,6 +53,22 @@ public class User {
         else {
             return false;
         }
+    }
+
+    public void createToken(){
+        this.token = UUID.randomUUID();
+        //добавляем 30 дней - время жизни токена
+        this.dateOfDeathToken = Instant.now().plusSeconds(30*24*60*60);
+    };
+
+    public boolean isTokenAlive(){
+        if(token == null){
+            return false;
+        }
+        if(Instant.now().isBefore(dateOfDeathToken)){
+            return false;
+        }
+        return true;
     }
 
 
