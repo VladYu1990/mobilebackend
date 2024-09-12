@@ -1,7 +1,7 @@
 package com.istudyenglish.mobilebackend.port.out.token;
 
 import com.istudyenglish.mobilebackend.application.CustomException.CustomException;
-import com.istudyenglish.mobilebackend.domain.Autorisation.Token;
+import com.istudyenglish.mobilebackend.userService.domain.Token;
 
 import java.util.ArrayList;
 import java.util.Collection;

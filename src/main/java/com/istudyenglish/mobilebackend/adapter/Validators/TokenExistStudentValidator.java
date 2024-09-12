@@ -3,11 +3,10 @@ package com.istudyenglish.mobilebackend.adapter.Validators;
 import com.istudyenglish.mobilebackend.application.CustomException.CustomException;
 import com.istudyenglish.mobilebackend.application.CustomException.CustomExceptionCode;
 import com.istudyenglish.mobilebackend.application.token.TokenUseCaseImp;
-import com.istudyenglish.mobilebackend.domain.Autorisation.Token;
+import com.istudyenglish.mobilebackend.userService.domain.Token;
 import com.istudyenglish.mobilebackend.domain.Education.Student;
 import com.istudyenglish.mobilebackend.port.in.student.StudentUseCase;
 import com.istudyenglish.mobilebackend.port.in.token.TokenUseCase;
-import com.istudyenglish.mobilebackend.port.in.user.UserUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

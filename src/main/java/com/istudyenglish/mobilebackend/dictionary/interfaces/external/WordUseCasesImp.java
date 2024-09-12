@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 @Component
-public class WordUseCasesImp implements WordsUserCases{
+public class WordUseCasesImp implements WordsUseCases {
 
     private WordDBPort wordDBPort;
 

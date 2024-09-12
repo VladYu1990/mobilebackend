@@ -67,7 +67,7 @@ public class TaskController {
         }
     }
 
-    @GetMapping("/getNext")
+    @GetMapping("/validateToken")
     public Response getNext(@RequestHeader Map<String, String> headers,
                             @RequestParam(defaultValue = "") String time,
                             @RequestParam(defaultValue = "1") String amount_tasks,

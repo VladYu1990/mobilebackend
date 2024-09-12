@@ -2,8 +2,8 @@ package com.istudyenglish.mobilebackend.application.token;
 
 import com.istudyenglish.mobilebackend.application.CustomException.CustomException;
 import com.istudyenglish.mobilebackend.application.user.UserUseCaseImpl;
-import com.istudyenglish.mobilebackend.domain.Autorisation.Token;
-import com.istudyenglish.mobilebackend.domain.Autorisation.User;
+import com.istudyenglish.mobilebackend.userService.domain.Token;
+import com.istudyenglish.mobilebackend.userService.domain.User;
 import com.istudyenglish.mobilebackend.port.in.token.TokenUseCase;
 import com.istudyenglish.mobilebackend.port.in.user.UserUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
