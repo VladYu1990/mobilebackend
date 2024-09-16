@@ -2,14 +2,10 @@ package com.istudyenglish.mobilebackend.application.token;
 
 import com.istudyenglish.mobilebackend.application.CustomException.CustomException;
 import com.istudyenglish.mobilebackend.application.CustomException.CustomExceptionCode;
-import com.istudyenglish.mobilebackend.application.user.UserMapper;
-import com.istudyenglish.mobilebackend.domain.Autorisation.Token;
-import com.istudyenglish.mobilebackend.domain.Autorisation.User;
+import com.istudyenglish.mobilebackend.userService.domain.Token;
 import com.istudyenglish.mobilebackend.port.out.token.TokenDBPort;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 

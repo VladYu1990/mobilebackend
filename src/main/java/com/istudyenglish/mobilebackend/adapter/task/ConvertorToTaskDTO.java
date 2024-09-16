@@ -5,13 +5,13 @@ import com.istudyenglish.mobilebackend.adapter.answer.AnswerDTO;
 import com.istudyenglish.mobilebackend.application.answer.AnswerUseCaseImpl;
 import com.istudyenglish.mobilebackend.application.similarAnswer.SimilarAnswerUseCaseImpl;
 import com.istudyenglish.mobilebackend.application.exercise.ExerciseUseCaseImpl;
-import com.istudyenglish.mobilebackend.domain.Education.Exercise;
+import com.istudyenglish.mobilebackend.tasksService.domain.exercise.Exercise;
 import com.istudyenglish.mobilebackend.port.in.answer.AnswerUseCase;
 import com.istudyenglish.mobilebackend.port.in.similarAnswer.SimilarAnswerUseCase;
 import com.istudyenglish.mobilebackend.port.in.exercise.ExerciseUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.istudyenglish.mobilebackend.domain.Education.Task.Task;
+import com.istudyenglish.mobilebackend.tasksService.domain.Task;
 
 import java.util.ArrayList;
 import java.util.Collection;

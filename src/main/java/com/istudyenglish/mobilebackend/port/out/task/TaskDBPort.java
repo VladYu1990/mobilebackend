@@ -1,7 +1,7 @@
 package com.istudyenglish.mobilebackend.port.out.task;
 
 import com.istudyenglish.mobilebackend.domain.Education.Student;
-import com.istudyenglish.mobilebackend.domain.Education.Task.Task;
+import com.istudyenglish.mobilebackend.tasksService.domain.Task;
 
 import java.time.Instant;
 import java.util.Collection;

@@ -2,8 +2,8 @@ package com.istudyenglish.mobilebackend.application.answer;
 
 import com.istudyenglish.mobilebackend.application.exercise.ExerciseUseCaseImpl;
 import com.istudyenglish.mobilebackend.domain.Education.Answer;
-import com.istudyenglish.mobilebackend.domain.Education.Exercise;
-import com.istudyenglish.mobilebackend.domain.Education.Task.Task;
+import com.istudyenglish.mobilebackend.tasksService.domain.exercise.Exercise;
+import com.istudyenglish.mobilebackend.tasksService.domain.Task;
 import com.istudyenglish.mobilebackend.port.in.exercise.ExerciseUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

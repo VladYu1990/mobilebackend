@@ -1,7 +1,7 @@
 package com.istudyenglish.mobilebackend.adapter.task;
 
-import com.istudyenglish.mobilebackend.domain.Education.Task.Task;
-import com.istudyenglish.mobilebackend.domain.Education.Task.TaskStatus;
+import com.istudyenglish.mobilebackend.tasksService.domain.Task;
+import com.istudyenglish.mobilebackend.tasksService.domain.TaskStatus;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 

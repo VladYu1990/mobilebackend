@@ -1,7 +1,6 @@
 package com.istudyenglish.mobilebackend.port.in.word;
 
-import com.istudyenglish.mobilebackend.domain.dictionary.Source;
-import com.istudyenglish.mobilebackend.domain.dictionary.Word;
+import com.istudyenglish.mobilebackend.dictionary.domain.Word;
 
 import java.util.List;
 

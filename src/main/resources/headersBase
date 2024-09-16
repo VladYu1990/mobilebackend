@@ -1,0 +1,6 @@
+name/type/value
+
+token/string/token uuid
+user/string/user uuid
+version/string/xx.yy.zz
+platform/string/type platform + version OS
