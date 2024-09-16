@@ -2,9 +2,9 @@ package com.istudyenglish.mobilebackend.application.task;
 
 import com.istudyenglish.mobilebackend.application.exercise.ExerciseUseCaseImpl;
 import com.istudyenglish.mobilebackend.domain.Education.*;
-import com.istudyenglish.mobilebackend.domain.Education.Task.Task;
-import com.istudyenglish.mobilebackend.domain.Education.Task.TaskStatus;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.istudyenglish.mobilebackend.tasksService.domain.Task;
+import com.istudyenglish.mobilebackend.tasksService.domain.TaskStatus;
+import com.istudyenglish.mobilebackend.tasksService.domain.exercise.Exercise;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;

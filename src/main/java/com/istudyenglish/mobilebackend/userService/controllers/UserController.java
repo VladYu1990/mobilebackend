@@ -45,11 +45,8 @@ public class UserController {
     }
 
     @GetMapping("/validateToken")
-    public boolean validateToken(@RequestHeader Map<String, String> headers) {
-        return userUseCases.validateToken(headers.get("token"),headers.get("user"));
+    public void validateToken(@RequestHeader Map<String, String> headers) throws CustomException {
+        userUseCases.validateToken(headers.get("token"),headers.get("user"));
     }
-
-
-
 
 }

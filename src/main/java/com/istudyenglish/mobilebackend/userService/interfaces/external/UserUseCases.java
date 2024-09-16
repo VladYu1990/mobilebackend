@@ -10,5 +10,5 @@ public interface UserUseCases {
     public void create(String login,String password,String phoneNumber);
     public UUID logIn(String login,String password) throws CustomException;
     public void logOut(String token);
-    public boolean validateToken(String token, String user);
+    public void validateToken(String token, String user) throws CustomException;
 }

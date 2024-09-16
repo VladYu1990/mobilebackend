@@ -58,14 +58,14 @@ public class UserUseCasesImp implements UserUseCases {
     }
 
     @Override
-    public boolean validateToken(String token, String userStr) {
-        User user = userDBPort.getUserViaToken(UUID.fromString(token));
-        if(!user.isTokenAlive()){
-            return false;
+    public void validateToken(String token, String userStr) throws CustomException {
+        UUID tokenUUID = UUID.fromString(token);
+        UUID userUUID = UUID.fromString(userStr);
+
+        User user = userDBPort.getUUID(userUUID);
+        if(!user.isTokenAlive() || user.getToken().equals(tokenUUID)){
+            throw new CustomException(CustomExceptionCode.TokenDoNotValid,"токен не верный или просрочен");
         }
-        if(!user.getUuid().equals(UUID.fromString(userStr))){
-            return false;
-        }
-        return true;
+
     }
 }

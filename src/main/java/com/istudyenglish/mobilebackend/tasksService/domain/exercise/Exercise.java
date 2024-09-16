@@ -1,5 +1,7 @@
-package com.istudyenglish.mobilebackend.domain.Education;
+package com.istudyenglish.mobilebackend.tasksService.domain.exercise;
 
+import com.istudyenglish.mobilebackend.domain.Education.TypesOfDirectionsTranslations;
+import com.istudyenglish.mobilebackend.domain.Education.TypesOfExercise;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -35,28 +37,16 @@ public class Exercise {
      */
     private String translate;
     /**
-     * направление значение-перевод
+     * Направление значение-перевод
      */
     private TypesOfDirectionsTranslations typeOfDirectionsTranslations;
+    /**
+     * UUID верного ответа
+     */
+    private UUID trueAnswerCode;
 
-    public void setValue(String value) {
-        this.value = value;
-    }
 
-    public void setTranslate(String translate) {
-        this.translate = translate;
-    }
-
-    public void setTypeOfDirectionsTranslations(TypesOfDirectionsTranslations typeOfDirectionsTranslations) {
-        this.typeOfDirectionsTranslations = typeOfDirectionsTranslations;
-    }
-
-    public boolean checkReply(String reply){
-        if(translate.equals(reply)){
-            return true;
-        }
-        else {
-            return false;
-        }
+    public boolean checkAnswer(UUID answerUUID){
+        return this.trueAnswerCode.equals(answerUUID);
     }
 }

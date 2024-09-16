@@ -1,4 +1,4 @@
-package com.istudyenglish.mobilebackend.adapter.task;
+package com.istudyenglish.mobilebackend.tasksService.interfaces.internal.task;
 
 import com.istudyenglish.mobilebackend.tasksService.domain.Task;
 import com.istudyenglish.mobilebackend.tasksService.domain.TaskStatus;
@@ -11,17 +11,18 @@ import java.util.UUID;
 
 @Component
 public class TaskMapper implements RowMapper<Task> {
+
     @Override
     public Task mapRow(ResultSet resultSet, int rowNum) throws SQLException {
 
         return Task.builder().
                 uuid(UUID.fromString(resultSet.getString("uuid"))).
                 exerciseUUID(UUID.fromString(resultSet.getString("exercise_uuid"))).
-                studentUUID(UUID.fromString(resultSet.getString("student_uuid"))).
-                nextRepetition(resultSet.getTimestamp("next_Repetition").toInstant()).
-                lastRepetition(resultSet.getTimestamp("last_Repetition").toInstant()).
+                userUUID(UUID.fromString(resultSet.getString("user_uuid"))).
+                nextRepetition(resultSet.getTimestamp("next_repetition").toInstant()).
+                lastRepetition(resultSet.getTimestamp("last_repetition").toInstant()).
                 status(TaskStatus.valueOf(resultSet.getString("status"))).
-                countRightResponses(resultSet.getInt("count_Right_Responses")).
+                countRightResponses(resultSet.getInt("count_right_responses")).
                 build();
     }
 }

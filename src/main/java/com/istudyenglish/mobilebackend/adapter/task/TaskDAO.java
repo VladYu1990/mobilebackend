@@ -5,7 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import com.istudyenglish.mobilebackend.domain.Education.Task.Task;
+import com.istudyenglish.mobilebackend.tasksService.domain.Task;
 import com.istudyenglish.mobilebackend.port.out.task.TaskDBPort;
 
 import java.time.Instant;

@@ -39,8 +39,17 @@ public class UserDAO implements UserDBPort {
     }
 
     @Override
+    public User getUUID(UUID userUUID) {
+        String sql = "select * " +
+                "from user " +
+                "where uuid = ('" + userUUID.toString() + "');";
+
+        return jdbcTemplate.query(sql, userMapper).get(0);
+    }
+
+    @Override
     public User getUserViaLoginPassword(String login, String password) {
-        //TODO возможна sql инекция, проверить что темплейт от такого умеет защищать
+        //TODO возможна sql иньекция, проверить что темплейт от такого умеет защищать
         String sql = "select * " +
                 "from user " +
                 "where login = ('" + login + "') " +

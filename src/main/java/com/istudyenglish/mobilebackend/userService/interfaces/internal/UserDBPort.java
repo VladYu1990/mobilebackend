@@ -9,6 +9,7 @@ import java.util.UUID;
 public interface UserDBPort {
 
     public void createUser(User user);
+    public User getUUID(UUID userUUID);
     public User getUserViaLoginPassword(String login,String password);
     public User getUserViaToken(UUID uuid);
 
