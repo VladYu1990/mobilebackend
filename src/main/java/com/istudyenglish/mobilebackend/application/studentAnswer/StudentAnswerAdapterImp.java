@@ -5,9 +5,8 @@ import com.istudyenglish.mobilebackend.application.CustomException.CustomExcepti
 import com.istudyenglish.mobilebackend.application.answer.AnswerUseCaseImpl;
 import com.istudyenglish.mobilebackend.application.student.StudentUseCaseImpl;
 import com.istudyenglish.mobilebackend.application.task.TaskUseCaseImpl;
-import com.istudyenglish.mobilebackend.domain.Education.Answer;
 import com.istudyenglish.mobilebackend.domain.Education.Student;
-import com.istudyenglish.mobilebackend.tasksService.domain.Task;
+import com.istudyenglish.mobilebackend.exercisesService.domain.Task;
 import com.istudyenglish.mobilebackend.port.in.studentAnswer.StudentAnswerAdapter;
 import com.istudyenglish.mobilebackend.port.in.answer.AnswerUseCase;
 import com.istudyenglish.mobilebackend.port.in.student.StudentUseCase;

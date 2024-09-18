@@ -1,7 +1,7 @@
 package com.istudyenglish.mobilebackend.application.task;
 
 import com.istudyenglish.mobilebackend.application.exercise.ExerciseUseCaseImpl;
-import com.istudyenglish.mobilebackend.tasksService.domain.Task;
+import com.istudyenglish.mobilebackend.exercisesService.domain.Task;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;

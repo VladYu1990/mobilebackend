@@ -1,8 +1,5 @@
 package com.istudyenglish.mobilebackend.port.in.similarAnswer;
 
-import com.istudyenglish.mobilebackend.domain.Education.Answer;
-import com.istudyenglish.mobilebackend.domain.Education.SimilarAnswer;
-
 import java.util.Collection;
 
 public interface SimilarAnswerUseCase {

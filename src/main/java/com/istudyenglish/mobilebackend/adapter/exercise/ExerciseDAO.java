@@ -1,6 +1,6 @@
 package com.istudyenglish.mobilebackend.adapter.exercise;
 
-import com.istudyenglish.mobilebackend.tasksService.domain.exercise.Exercise;
+import com.istudyenglish.mobilebackend.exercisesService.domain.exercise.Exercise;
 import com.istudyenglish.mobilebackend.port.out.exercise.ExerciseDBPort;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;

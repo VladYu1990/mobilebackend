@@ -1,8 +1,6 @@
 package com.istudyenglish.mobilebackend.application.similarAnswer;
 
 import com.istudyenglish.mobilebackend.adapter.similarAnswer.SimilarAnswerDAO;
-import com.istudyenglish.mobilebackend.domain.Education.Answer;
-import com.istudyenglish.mobilebackend.domain.Education.SimilarAnswer;
 import com.istudyenglish.mobilebackend.port.in.similarAnswer.SimilarAnswerUseCase;
 import com.istudyenglish.mobilebackend.port.out.similarAnswer.SimilarAnswersDBport;
 import org.springframework.beans.factory.annotation.Autowired;

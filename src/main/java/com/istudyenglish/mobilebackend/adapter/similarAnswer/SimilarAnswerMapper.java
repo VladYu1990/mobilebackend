@@ -1,6 +1,5 @@
 package com.istudyenglish.mobilebackend.adapter.similarAnswer;
 
-import com.istudyenglish.mobilebackend.domain.Education.SimilarAnswer;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 

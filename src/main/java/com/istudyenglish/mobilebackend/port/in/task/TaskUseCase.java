@@ -2,9 +2,9 @@ package com.istudyenglish.mobilebackend.port.in.task;
 
 
 import com.istudyenglish.mobilebackend.application.CustomException.CustomException;
-import com.istudyenglish.mobilebackend.tasksService.domain.exercise.Exercise;
+import com.istudyenglish.mobilebackend.exercisesService.domain.exercise.Exercise;
 import com.istudyenglish.mobilebackend.domain.Education.Student;
-import com.istudyenglish.mobilebackend.tasksService.domain.Task;
+import com.istudyenglish.mobilebackend.exercisesService.domain.Task;
 
 import java.time.Instant;
 import java.util.Collection;

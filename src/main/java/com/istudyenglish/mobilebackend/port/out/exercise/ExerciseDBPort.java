@@ -1,6 +1,6 @@
 package com.istudyenglish.mobilebackend.port.out.exercise;
 
-import com.istudyenglish.mobilebackend.tasksService.domain.exercise.Exercise;
+import com.istudyenglish.mobilebackend.exercisesService.domain.exercise.Exercise;
 
 import java.util.List;
 import java.util.UUID;

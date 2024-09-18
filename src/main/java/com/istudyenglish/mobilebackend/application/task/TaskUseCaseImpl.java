@@ -6,9 +6,9 @@ import com.istudyenglish.mobilebackend.application.CustomException.CustomExcepti
 import com.istudyenglish.mobilebackend.application.CustomException.CustomExceptionCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.istudyenglish.mobilebackend.tasksService.domain.exercise.Exercise;
+import com.istudyenglish.mobilebackend.exercisesService.domain.exercise.Exercise;
 import com.istudyenglish.mobilebackend.domain.Education.Student;
-import com.istudyenglish.mobilebackend.tasksService.domain.Task;
+import com.istudyenglish.mobilebackend.exercisesService.domain.Task;
 import com.istudyenglish.mobilebackend.port.in.task.TaskUseCase;
 
 import java.time.Instant;

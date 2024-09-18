@@ -1,7 +1,6 @@
 package com.istudyenglish.mobilebackend.adapter.studentAnswer;
 
-import com.istudyenglish.mobilebackend.domain.Education.Answer;
-import com.istudyenglish.mobilebackend.tasksService.domain.Task;
+import com.istudyenglish.mobilebackend.exercisesService.domain.Task;
 import com.istudyenglish.mobilebackend.port.out.studentAnswer.StudentAnswerDBPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;

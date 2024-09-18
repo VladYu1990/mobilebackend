@@ -1,6 +1,5 @@
 package com.istudyenglish.mobilebackend.adapter.answer;
 
-import com.istudyenglish.mobilebackend.domain.Education.Answer;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 

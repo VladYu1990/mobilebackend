@@ -1,7 +1,7 @@
 package com.istudyenglish.mobilebackend.adapter.exercise;
 
 import com.istudyenglish.mobilebackend.domain.Education.*;
-import com.istudyenglish.mobilebackend.tasksService.domain.exercise.Exercise;
+import com.istudyenglish.mobilebackend.exercisesService.domain.exercise.Exercise;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 

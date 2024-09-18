@@ -1,8 +1,7 @@
 package com.istudyenglish.mobilebackend.application.answer;
 
-import com.istudyenglish.mobilebackend.domain.Education.Answer;
 import com.istudyenglish.mobilebackend.adapter.answer.AnswerDAO;
-import com.istudyenglish.mobilebackend.tasksService.domain.Task;
+import com.istudyenglish.mobilebackend.exercisesService.domain.Task;
 import com.istudyenglish.mobilebackend.port.in.answer.AnswerUseCase;
 import com.istudyenglish.mobilebackend.port.out.answer.AnswerDBPort;
 import org.springframework.beans.factory.annotation.Autowired;

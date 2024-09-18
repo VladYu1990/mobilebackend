@@ -1,7 +1,6 @@
 package com.istudyenglish.mobilebackend.port.in.answer;
 
-import com.istudyenglish.mobilebackend.domain.Education.Answer;
-import com.istudyenglish.mobilebackend.tasksService.domain.Task;
+import com.istudyenglish.mobilebackend.exercisesService.domain.Task;
 
 import java.time.Instant;
 import java.util.UUID;

@@ -2,10 +2,10 @@ package com.istudyenglish.mobilebackend.application.task;
 
 import org.springframework.stereotype.Component;
 import com.istudyenglish.mobilebackend.application.exercise.ExerciseUseCaseImpl;
-import com.istudyenglish.mobilebackend.tasksService.domain.exercise.Exercise;
+import com.istudyenglish.mobilebackend.exercisesService.domain.exercise.Exercise;
 import com.istudyenglish.mobilebackend.domain.Education.Student;
-import com.istudyenglish.mobilebackend.tasksService.domain.Task;
-import com.istudyenglish.mobilebackend.tasksService.domain.TaskStatus;
+import com.istudyenglish.mobilebackend.exercisesService.domain.Task;
+import com.istudyenglish.mobilebackend.exercisesService.domain.TaskStatus;
 
 @Component
 public class TaskReadinessForStudyCheck {

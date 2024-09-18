@@ -1,7 +1,5 @@
 package com.istudyenglish.mobilebackend.adapter.similarAnswer;
 
-import com.istudyenglish.mobilebackend.domain.Education.Answer;
-import com.istudyenglish.mobilebackend.domain.Education.SimilarAnswer;
 import com.istudyenglish.mobilebackend.port.out.similarAnswer.SimilarAnswersDBport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
