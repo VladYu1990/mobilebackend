@@ -2,7 +2,7 @@ NEW
 
 
 create table words(
-uuid uuid,
+uuid uuid primary key,
 value text,
 translate text,
 value_language text,
@@ -12,26 +12,16 @@ CONSTRAINT only_one_uuid_word UNIQUE (uuid)
 );
 
 
-create table similarWord(
-uuid_word uuid,
+create table similarAnswers(
+uuid_word uuid primary key,
 uuid_similar_words text,
 CONSTRAINT only_one_uuid UNIQUE (uuid_word)
 );
 
 
 
-create table tasks(
-uuid text,
-exercise_UUID text,
-student_uuid text,
-next_Repetition timestamp,
-last_Repetition timestamp,
-status text,
-count_Right_Responses int
-);
-
-create table user(
-uuid text,
+create table users(
+uuid uuid primary key,
 login text,
 password text,
 phone_number text,
@@ -42,7 +32,7 @@ CONSTRAINT only_one_user_on_login UNIQUE (uuid)
 );
 
 create table tasks(
-uuid text,
+uuid uuid primary key,
 exercise_uuid text,
 user_uuid text,
 next_repetition timestamp,
@@ -51,6 +41,19 @@ status text,
 count_right_responses int
 CONSTRAINT only_one_unique_task_on_user UNIQUE (exercise_uuid,user_uuid)
 );
+
+
+create table exercises(
+uuid uuid primary key,
+types_of_exercise text,
+source_uuid text,
+value text,
+translate text,
+type_of_directions_translations text,
+true_answer_uuid uuid
+);
+
+
 
 
 

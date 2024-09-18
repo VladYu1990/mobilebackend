@@ -43,10 +43,10 @@ public class Exercise {
     /**
      * UUID верного ответа
      */
-    private UUID trueAnswerCode;
+    private UUID trueAnswerUUID;
 
 
     public boolean checkAnswer(UUID answerUUID){
-        return this.trueAnswerCode.equals(answerUUID);
+        return this.trueAnswerUUID.equals(answerUUID);
     }
 }

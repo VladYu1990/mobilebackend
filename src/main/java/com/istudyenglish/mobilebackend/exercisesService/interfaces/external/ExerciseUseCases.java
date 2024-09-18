@@ -10,4 +10,6 @@ public interface ExerciseUseCases {
     public Exercise getOnUUID(UUID exerciseUUID);
     public void create(UUID wordUUID);
     public boolean checkAnswer(UUID exerciseUUID,UUID answerUUID);
+
+    public void addForUser(UUID sourceUUID,UUID userUUID);
 }

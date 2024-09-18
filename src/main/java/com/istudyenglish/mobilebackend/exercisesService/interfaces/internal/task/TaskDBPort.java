@@ -9,7 +9,7 @@ public interface TaskDBPort {
 
     public List<Task> getNextOnlyStudy(UUID userUUID, int count);
     public Task genOnUUID(UUID task);
-    public void create(Task task);
+    public void create(List<Task> taskList);
     public void update(Task task);
 
     Task getByUserAndExercise(UUID userUUID, UUID exerciseUUID);

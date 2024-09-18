@@ -8,5 +8,7 @@ import java.util.UUID;
 
 @Component
 public interface ExerciseForViewUseCases {
-    List<ExerciseForView> getNextList(UUID userUUID, int count);
+    public List<ExerciseForView> getNextList(UUID userUUID, int count);
+
+    public void addForUser(UUID sourceUUID,UUID userUUID);
 }

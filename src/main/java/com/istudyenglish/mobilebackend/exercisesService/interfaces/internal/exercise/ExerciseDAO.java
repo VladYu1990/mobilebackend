@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -33,7 +34,7 @@ public class ExerciseDAO implements ExerciseDBPort {
     }
 
     @Override
-    public void create(Task task) {
+    public void create(Exercise exercise) {
         String sql = "insert into task(uuid,exercise_uuid,user_uuid,next_repetition,last_repetition,status,count_right_responses) " +
                 "values(" +
                 task.getUuid() + "," +
@@ -49,7 +50,7 @@ public class ExerciseDAO implements ExerciseDBPort {
     }
 
     @Override
-    public void update(Task task) {
+    public void update(Exercise exercise) {
         String sql = "update task set " +
                 "next_repetition = " + task.getNextRepetition() + "," +
                 "last_repetition = " + task.getLastRepetition() + "," +
@@ -59,5 +60,15 @@ public class ExerciseDAO implements ExerciseDBPort {
 
         jdbcTemplate.update(sql);
     }
+
+    @Override
+    public List<Exercise> genOnSourceUUID(UUID sourceUUID) {
+        String sql = "select * " +
+                "from exercises " +
+                "where source_uuid = " + sourceUUID.toString() + ";";
+
+        return jdbcTemplate.query(sql, exerciseMapper);
+    }
+
 
 }

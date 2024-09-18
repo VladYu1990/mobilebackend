@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -55,9 +56,13 @@ public class TaskUseCasesImp implements TaskUseCases{
     }
 
     @Override
-    public void create(UUID userUUID, UUID exerciseUUID) {
-        Task task = new Task(exerciseUUID,userUUID);
-        taskDBPort.create(task);
+    public void create(List<UUID> exerciseUUIDList,UUID userUUID) {
+        List<Task> taskList = new ArrayList<>();
+        for(UUID exerciseUUID: exerciseUUIDList){
+            taskList.add(new Task(exerciseUUID,userUUID));
+        }
+
+        taskDBPort.create(taskList);
     }
 
 

@@ -38,4 +38,14 @@ public class ExercisesController {
                 count);
     }
 
+    @PostMapping("/addForUserByWord/{wordUUID}")
+    public void  addForUser(@RequestHeader Map<String, String> headers,
+                            @RequestParam String wordUUID) throws CustomException {
+        userUseCases.validateToken(
+                headers.get("token"),
+                headers.get("user"));
+
+        exerciseForViewUseCases.addForUser(UUID.fromString(wordUUID),UUID.fromString(headers.get("user")));
+    }
+
 }

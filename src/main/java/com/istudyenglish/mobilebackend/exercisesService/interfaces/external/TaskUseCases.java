@@ -12,7 +12,7 @@ public interface TaskUseCases {
     public Task getByUserAndExercise(UUID userUUID,UUID exerciseUUID);
     public Task getOnUUID(UUID userUUID, UUID taskUUID) throws CustomException;
     public void giveAnswer(UUID userUUID, UUID taskUUID, UUID answerUUID, Instant timeAnswer) throws CustomException;
-    public void create(UUID userUUID,UUID exerciseUUID);
+    public void create(List<UUID> exerciseUUIDList,UUID userUUID);
     public void updateFromAnswer(UUID userUUID,UUID exerciseUUID,boolean isTrue,Instant instantAnswer);
 }
 

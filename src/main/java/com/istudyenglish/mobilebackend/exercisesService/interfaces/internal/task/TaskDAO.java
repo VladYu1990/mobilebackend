@@ -57,8 +57,10 @@ public class TaskDAO implements TaskDBPort {
     }
 
     @Override
-    public void create(Task task) {
-        String sql = "insert into task(uuid,exercise_uuid,user_uuid,next_repetition,last_repetition,status,count_right_responses) " +
+    public void create(List<Task> taskList) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for(Task task: taskList)
+        stringBuilder.append("insert into task(uuid,exercise_uuid,user_uuid,next_repetition,last_repetition,status,count_right_responses) " +
                 "values(" +
                 task.getUuid() + "," +
                 task.getExerciseUUID() + "," +
@@ -66,9 +68,9 @@ public class TaskDAO implements TaskDBPort {
                 task.getNextRepetition() + "," +
                 task.getLastRepetition() + "," +
                 task.getStatus().toString() + "," +
-                task.getCountRightResponses() + ",);";
+                task.getCountRightResponses() + ",);/n");
 
-        jdbcTemplate.update(sql);
+        jdbcTemplate.update(stringBuilder.toString());
 
     }
 
