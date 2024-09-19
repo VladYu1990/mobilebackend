@@ -76,8 +76,8 @@ public class TaskUseCasesImp implements TaskUseCases{
     public void updateFromAnswer(UUID userUUID, UUID exerciseUUID, boolean isTrue,Instant instantAnswer) {
         Task task = getByUserAndExercise(userUUID,exerciseUUID);
         if(isTrue){
-            task.updateIfAnswerIsTrue();
+            task.updateIfAnswerIsTrue(instantAnswer);
         }
-        else task.updateIfAnswerIsFalse();
+        else task.updateIfAnswerIsFalse(instantAnswer);
     }
 }
