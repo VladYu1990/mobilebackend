@@ -24,41 +24,36 @@ public class ExerciseDAO implements ExerciseDBPort {
     }
 
     @Override
-    public Exercise genOnUUID(UUID exerciseUUID) {
-        String sql = "select * " +
-                "from exercise " +
-                "where uuid = " + exerciseUUID.toString() + ";";
+    public List<Exercise> genOnUUIDs(List<UUID> exerciseUUIDsList) {
 
-        return jdbcTemplate.query(sql, exerciseMapper).get(0);
+        StringBuilder stringBuilder = new StringBuilder();
+        //todo доработать блок селекта и маппер
+        stringBuilder.append("select e.*,t1.*,t2.* " +
+                "from exercise as e,text as t1,text as t2 " +
+                "where e.question_uuid = t1.uuid " +
+                "and e.answer_uuid =t2.uuid " +
+                "and uuid in (");
+        for(UUID uuid: exerciseUUIDsList){
+            stringBuilder.append(uuid.toString());
+            stringBuilder.append(",");
+        }
+        stringBuilder.deleteCharAt(stringBuilder.length() -1);
+        stringBuilder.append(");");
+
+        return jdbcTemplate.query(stringBuilder.toString(), exerciseMapper);
 
     }
 
     @Override
     public void create(Exercise exercise) {
-        String sql = "insert into task(uuid,exercise_uuid,user_uuid,next_repetition,last_repetition,status,count_right_responses) " +
-                "values(" +
-                task.getUuid() + "," +
-                task.getExerciseUUID() + "," +
-                task.getUserUUID() + "," +
-                task.getNextRepetition() + "," +
-                task.getLastRepetition() + "," +
-                task.getStatus().toString() + "," +
-                task.getCountRightResponses() + ",);";
+        //todo
 
-        jdbcTemplate.update(sql);
 
     }
 
     @Override
     public void update(Exercise exercise) {
-        String sql = "update task set " +
-                "next_repetition = " + task.getNextRepetition() + "," +
-                "last_repetition = " + task.getLastRepetition() + "," +
-                "status = " + task.getStatus().toString() + "," +
-                "count_right_responses = " + task.getCountRightResponses() + " " +
-                "where uuid = " + task.getUuid() + ";";
 
-        jdbcTemplate.update(sql);
     }
 
     @Override

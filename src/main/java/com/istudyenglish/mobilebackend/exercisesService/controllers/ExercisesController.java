@@ -1,6 +1,7 @@
 package com.istudyenglish.mobilebackend.exercisesService.controllers;
 
-import com.istudyenglish.mobilebackend.application.CustomException.CustomException;
+
+import com.istudyenglish.mobilebackend.CustomException;
 import com.istudyenglish.mobilebackend.exercisesService.adapters.ExerciseForView;
 import com.istudyenglish.mobilebackend.exercisesService.interfaces.external.*;
 import com.istudyenglish.mobilebackend.userService.interfaces.external.UserUseCases;

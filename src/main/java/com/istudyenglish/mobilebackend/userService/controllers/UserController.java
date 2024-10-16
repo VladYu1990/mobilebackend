@@ -1,6 +1,10 @@
 package com.istudyenglish.mobilebackend.userService.controllers;
 
-import com.istudyenglish.mobilebackend.application.CustomException.CustomException;
+
+import com.istudyenglish.mobilebackend.CustomException;
+import com.istudyenglish.mobilebackend.userService.adapters.token.Token;
+import com.istudyenglish.mobilebackend.userService.adapters.token.TokenAdapter;
+import com.istudyenglish.mobilebackend.userService.domain.User;
 import com.istudyenglish.mobilebackend.userService.interfaces.external.UserUseCases;
 import com.istudyenglish.mobilebackend.userService.interfaces.external.UserUseCasesImp;
 import lombok.extern.log4j.Log4j2;
@@ -16,27 +20,25 @@ import java.util.UUID;
 public class UserController {
 
     private UserUseCases userUseCases;
+    private TokenAdapter tokenAdapter;
 
 
     @Autowired
-    public UserController(UserUseCasesImp userUseCasesImp) {
+    public UserController(UserUseCasesImp userUseCasesImp,TokenAdapter tokenAdapter) {
         this.userUseCases = userUseCasesImp;
+        this.tokenAdapter = tokenAdapter;
     }
 
     @PostMapping("/create")
     public void create(@RequestHeader Map<String, String> headers){
-        if(headers.get("phoneNumber") == null){
-            userUseCases.create(headers.get("login"),headers.get("password"));
-        }
-        else{
-            userUseCases.create(headers.get("login"),headers.get("password"),headers.get("phoneNumber"));
-        }
+        userUseCases.create(headers.get("login"),headers.get("password"),headers.get("phoneNumber"));
     }
 
     @PutMapping("/logIn")
-    public UUID logIn(@RequestHeader Map<String, String> headers) throws CustomException {
+    public Token logIn(@RequestHeader Map<String, String> headers) throws CustomException {
         //TODO глянуть как отрабатывает выкидывание ошибок и если не ок поправить
-        return userUseCases.logIn(headers.get("login"),headers.get("password"));
+        User user = userUseCases.logIn(headers.get("login"),headers.get("password"));
+        return tokenAdapter.adapt(user);
     }
 
     @PutMapping("/logOut")

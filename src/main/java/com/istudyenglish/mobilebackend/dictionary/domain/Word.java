@@ -1,13 +1,13 @@
 package com.istudyenglish.mobilebackend.dictionary.domain;
 
-import com.istudyenglish.mobilebackend.domain.Education.Languages;
-import com.istudyenglish.mobilebackend.domain.Education.PartsOfSpeech;
+
 import lombok.*;
 
 import java.util.UUID;
 
 @Getter
 @Builder
+@AllArgsConstructor
 public class Word{
 
     /**
@@ -25,17 +25,17 @@ public class Word{
     /**
      * язык написания
      */
-    private Languages valueLanguage;
+    private Language valueLanguage;
     /**
      * язык перевода
      */
-    private Languages translateLanguage;
+    private Language translateLanguage;
     /**
      * код части речи
      */
-    private PartsOfSpeech partOfSpeech;
+    private PartOfSpeech partOfSpeech;
 
-    public Word(String value, String translate, Languages valueLanguage, Languages translateLanguage, PartsOfSpeech partOfSpeechCode) {
+    public Word(String value, String translate, Language valueLanguage, Language translateLanguage, PartOfSpeech partOfSpeechCode) {
         this.uuid = UUID.randomUUID();
         this.value = value;
         this.translate = translate;

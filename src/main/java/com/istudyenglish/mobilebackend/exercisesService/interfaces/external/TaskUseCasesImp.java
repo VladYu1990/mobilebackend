@@ -1,7 +1,6 @@
 package com.istudyenglish.mobilebackend.exercisesService.interfaces.external;
 
-import com.istudyenglish.mobilebackend.application.CustomException.CustomException;
-import com.istudyenglish.mobilebackend.application.CustomException.CustomExceptionCode;
+import com.istudyenglish.mobilebackend.CustomException;
 import com.istudyenglish.mobilebackend.exercisesService.domain.Task;
 import com.istudyenglish.mobilebackend.exercisesService.interfaces.internal.task.TaskDAO;
 import com.istudyenglish.mobilebackend.exercisesService.interfaces.internal.task.TaskDBPort;
@@ -16,13 +15,11 @@ import java.util.UUID;
 @Component
 public class TaskUseCasesImp implements TaskUseCases{
     TaskDBPort taskDBPort;
-    ExerciseUseCases exerciseUseCases;
 
 
     @Autowired
-    public TaskUseCasesImp(TaskDAO taskDAO, ExerciseUseCasesImp exerciseUseCasesImp) {
+    public TaskUseCasesImp(TaskDAO taskDAO) {
         this.taskDBPort = taskDAO;
-        this.exerciseUseCases = exerciseUseCasesImp;
     }
 
     @Override
@@ -45,18 +42,12 @@ public class TaskUseCasesImp implements TaskUseCases{
 
     @Override
     public void giveAnswer(UUID userUUID, UUID taskUUID, UUID answerUUID, Instant timeAnswer) throws CustomException {
-        Task task = taskDBPort.genOnUUID(taskUUID);
-        checkTaskBelongsUser(userUUID,task);
-        if(exerciseUseCases.checkAnswer(task.getExerciseUUID(),answerUUID)){
-            task.updateIfAnswerIsTrue(timeAnswer);
-        }
-        else {
-            task.updateIfAnswerIsFalse(timeAnswer);
-        }
+        //todo
     }
 
     @Override
     public void create(List<UUID> exerciseUUIDList,UUID userUUID) {
+        //todo проверку что у юзера достаточно баланса на таски
         List<Task> taskList = new ArrayList<>();
         for(UUID exerciseUUID: exerciseUUIDList){
             taskList.add(new Task(exerciseUUID,userUUID));
@@ -68,7 +59,7 @@ public class TaskUseCasesImp implements TaskUseCases{
 
     private void checkTaskBelongsUser(UUID userUUID, Task task) throws CustomException {
         if(!task.checkUserAffiliation(userUUID)){
-            throw new CustomException(CustomExceptionCode.AssignmentDoesNotBelongToStudent,"у юзера не такой таски");
+            throw new CustomException();
         }
     }
 

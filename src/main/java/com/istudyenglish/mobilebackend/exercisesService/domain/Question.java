@@ -1,5 +1,4 @@
-package com.istudyenglish.mobilebackend.exercisesService.domain.answer;
-
+package com.istudyenglish.mobilebackend.exercisesService.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,10 +6,10 @@ import lombok.Getter;
 
 import java.util.UUID;
 
-@AllArgsConstructor
 @Getter
+@AllArgsConstructor
 @Builder
-public class Answer {
+public class Question {
     private UUID uuid;
     private String value;
     private String language;

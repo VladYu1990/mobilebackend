@@ -29,20 +29,16 @@ public class User {
     private UUID token;
     private Instant dateOfDeathToken;
 
-    public User(String login, String password) {
-        this.uuid = UUID.randomUUID();
-        this.login = login;
-        this.password = password;
-    }
-
     public User(String login, String password, String phoneNumber) {
         this.uuid = UUID.randomUUID();
         this.login = login;
-        this.password = password;
         this.phoneNumber = phoneNumber;
+        setNewPassword(password);
+        setNewToken();
     }
 
     public void setNewPassword(String password) {
+        //TODO добавить проверку пароля на длину, спец символы и тд
         this.password = password;
     }
 
@@ -69,6 +65,11 @@ public class User {
             return false;
         }
         return true;
+    }
+
+    private void setNewToken(){
+        this.token = UUID.randomUUID();
+        this.dateOfDeathToken = Instant.now().plusSeconds(30*24*60*60);
     }
 
 

@@ -10,17 +10,21 @@ import java.util.List;
 
 @Component
 public class ExerciseForViewAdapter {
+    AnswerForViewAdapter answerForViewAdapter;
+
 
 
     @Autowired
-    public ExerciseForViewAdapter() {
+    public ExerciseForViewAdapter(AnswerForViewAdapter answerForViewAdapter) {
+        this.answerForViewAdapter = answerForViewAdapter;
     }
 
     public ExerciseForView adapt(Exercise exercise,List<Answer> answerList){
+
         return new ExerciseForView(
                 exercise.getUuid().toString(),
-                exercise.getValue(),
+                exercise.getQuestion().getValue(),
                 exercise.getTypesOfExercise(),
-                answerList);
+                answerForViewAdapter.adapt(answerList,exercise.getAnswer().getUuid()));
     }
 }

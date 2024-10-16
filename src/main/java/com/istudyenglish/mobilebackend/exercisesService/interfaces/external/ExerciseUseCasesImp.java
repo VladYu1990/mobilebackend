@@ -24,17 +24,21 @@ public class ExerciseUseCasesImp implements ExerciseUseCases {
 
     @Override
     public List<Exercise> getOnUUIDs(List<UUID> uuidList) {
-        return List.of();
+
+        return exerciseDBPort.genOnUUIDs(uuidList);
     }
 
     @Override
     public Exercise getOnUUID(UUID exerciseUUID){
-        return null;
+        List<UUID> uuidList = new ArrayList<>();
+        uuidList.add(exerciseUUID);
+
+        return getOnUUIDs(uuidList).get(0);
     }
 
     @Override
     public void create(UUID wordUUID) {
-
+        //todo it
     }
 
     @Override

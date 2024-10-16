@@ -1,8 +1,10 @@
 package com.istudyenglish.mobilebackend.exercisesService.interfaces.internal.exercise;
 
-import com.istudyenglish.mobilebackend.domain.Education.TypesOfDirectionsTranslations;
-import com.istudyenglish.mobilebackend.domain.Education.TypesOfExercise;
+
+import com.istudyenglish.mobilebackend.exercisesService.domain.Question;
+import com.istudyenglish.mobilebackend.exercisesService.domain.answer.Answer;
 import com.istudyenglish.mobilebackend.exercisesService.domain.exercise.Exercise;
+import com.istudyenglish.mobilebackend.exercisesService.domain.exercise.TypesOfExercise;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
@@ -20,10 +22,16 @@ public class ExerciseMapper implements RowMapper<Exercise> {
                 uuid(UUID.fromString(resultSet.getString("uuid"))).
                 typesOfExercise(TypesOfExercise.valueOf(resultSet.getString("types_of_exercise"))).
                 sourceUUID(UUID.fromString(resultSet.getString("source_uuid"))).
-                value(resultSet.getString("value")).
-                translate(resultSet.getString("translate")).
-                typeOfDirectionsTranslations(TypesOfDirectionsTranslations.valueOf(resultSet.getString("type_of_directions_translations"))).
-                trueAnswerUUID(UUID.fromString(resultSet.getString("true_answer_uuid"))).
-                build();
+                question(Question.builder().
+                        uuid(UUID.fromString(resultSet.getString("t1.uuid"))).
+                        value(resultSet.getString("t1.value")).
+                        language(resultSet.getString("t1.language")).
+                        build()).
+                answer(Answer.builder().
+                        uuid(UUID.fromString(resultSet.getString("t2.uuid"))).
+                        value(resultSet.getString("t2.value")).
+                        language(resultSet.getString("t2.language")).
+                        build())
+                .build();
     }
 }

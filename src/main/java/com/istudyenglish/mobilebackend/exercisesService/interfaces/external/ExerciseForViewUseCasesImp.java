@@ -47,7 +47,7 @@ public class ExerciseForViewUseCasesImp implements ExerciseForViewUseCases{
     }
 
     private List<Answer> getAnswerOptions(Exercise exercise){
-        return answerUseCases.getAnswerWithSimilarByUUID(exercise.getTrueAnswerUUID());
+        return answerUseCases.getAnswerWithSimilarByUUID(exercise.getAnswer().getUuid());
     }
 
     @Override

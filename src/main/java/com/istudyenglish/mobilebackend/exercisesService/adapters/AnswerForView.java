@@ -1,17 +1,15 @@
-package com.istudyenglish.mobilebackend.exercisesService.domain.answer;
-
+package com.istudyenglish.mobilebackend.exercisesService.adapters;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 
 import java.util.UUID;
 
 @AllArgsConstructor
 @Getter
-@Builder
-public class Answer {
-    private UUID uuid;
+public class AnswerForView {
+    private String uuid;
     private String value;
     private String language;
+    private boolean isTrue;
 }

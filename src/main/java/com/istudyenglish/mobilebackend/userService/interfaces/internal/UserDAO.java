@@ -11,6 +11,7 @@ import java.time.Instant;
 import java.util.UUID;
 
 @Component
+@Log4j2
 public class UserDAO implements UserDBPort {
 
     JdbcTemplate jdbcTemplate;
@@ -26,13 +27,17 @@ public class UserDAO implements UserDBPort {
 
     @Override
     public void createUser(User user) {
-        String sql = "insert into user (uuid,login.password,phone_number,date_create) " +
-                "values(" +
-                user.getUuid() + "," +
-                user.getLogin() + "," +
-                user.getPassword() +"," +
-                user.getPhoneNumber() + "," +
-                Instant.now() + ");";
+        String sql = "insert into users (uuid,login,password,phone_number,date_create,token,date_of_death_token) " +
+                "values('" +
+                user.getUuid() + "','" +
+                user.getLogin() + "','" +
+                user.getPassword() +"','" +
+                user.getPhoneNumber() + "','" +
+                Instant.now() + "','" +
+                user.getToken() + "','" +
+                user.getDateOfDeathToken() + "');";
+
+        log.info(sql);
 
         jdbcTemplate.update(sql);
 
@@ -51,7 +56,7 @@ public class UserDAO implements UserDBPort {
     public User getUserViaLoginPassword(String login, String password) {
         //TODO возможна sql иньекция, проверить что темплейт от такого умеет защищать
         String sql = "select * " +
-                "from user " +
+                "from users " +
                 "where login = ('" + login + "') " +
                 "and password = ('" + password + "');";
 
@@ -61,7 +66,7 @@ public class UserDAO implements UserDBPort {
     @Override
     public User getUserViaToken(UUID uuid) {
         String sql = "select * " +
-                "from user " +
+                "from users " +
                 "where token = ('" + uuid.toString() + "');";
 
         return jdbcTemplate.query(sql, userMapper).get(0);
@@ -69,7 +74,7 @@ public class UserDAO implements UserDBPort {
 
     @Override
     public void createToken(User user) {
-        String sql = "update user set " +
+        String sql = "update users set " +
                 "token = " + user.getToken() + "," +
                 "date_of_death_token = " + user.getDateOfDeathToken() + " " +
                 "where uuid = " + user.getUuid() + ";";
@@ -79,7 +84,7 @@ public class UserDAO implements UserDBPort {
 
     @Override
     public void deleteToken(User user) {
-        String sql = "update user set " +
+        String sql = "update users set " +
                 "token = ''" +
                 "date_of_death_token = ''" +
                 "where token = " + user.getUuid() + ";";

@@ -11,11 +11,19 @@ part_of_speech_code integer,
 CONSTRAINT only_one_uuid_word UNIQUE (uuid)
 );
 
+create table text(
+uuid uuid primary key,
+value text,
+language text,
+CONSTRAINT only_one_uuid_text UNIQUE (uuid)
+);
 
-create table similarAnswers(
-uuid_word uuid primary key,
-uuid_similar_words text,
-CONSTRAINT only_one_uuid UNIQUE (uuid_word)
+
+create table similar_ext(
+uuid_text uuid primary key,
+uuid_similar_text uuid,
+count_similar real,
+CONSTRAINT only_one_uuid UNIQUE (uuid_text)
 );
 
 
@@ -47,10 +55,8 @@ create table exercises(
 uuid uuid primary key,
 types_of_exercise text,
 source_uuid text,
-value text,
-translate text,
-type_of_directions_translations text,
-true_answer_uuid uuid
+question_uuid uuid,
+answer_uuid uuid
 );
 
 

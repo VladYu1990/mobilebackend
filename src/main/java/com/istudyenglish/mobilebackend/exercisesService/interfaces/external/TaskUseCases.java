@@ -1,6 +1,7 @@
 package com.istudyenglish.mobilebackend.exercisesService.interfaces.external;
 
-import com.istudyenglish.mobilebackend.application.CustomException.CustomException;
+
+import com.istudyenglish.mobilebackend.CustomException;
 import com.istudyenglish.mobilebackend.exercisesService.domain.Task;
 
 import java.time.Instant;
