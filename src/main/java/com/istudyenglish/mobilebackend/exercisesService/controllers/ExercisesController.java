@@ -26,9 +26,9 @@ public class ExercisesController {
         this.exerciseForViewUseCases = exerciseForViewUseCasesImp;
     }
 
-    @GetMapping("/next/{count}")
+    @GetMapping("/next/{countExercise}")
     public List<ExerciseForView> getNext(@RequestHeader Map<String, String> headers,
-                                         @RequestParam int count) throws CustomException {
+                                         @RequestParam int countExercise) throws CustomException {
 
         userUseCases.validateToken(
                 headers.get("token"),
@@ -36,7 +36,7 @@ public class ExercisesController {
 
         return exerciseForViewUseCases.getNextList(
                 UUID.fromString(headers.get("user")),
-                count);
+                countExercise);
     }
 
     @PostMapping("/addForUserByWord/{wordUUID}")
