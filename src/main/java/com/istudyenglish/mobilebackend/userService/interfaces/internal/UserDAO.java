@@ -37,8 +37,6 @@ public class UserDAO implements UserDBPort {
                 user.getToken() + "','" +
                 user.getDateOfDeathToken() + "');";
 
-        log.info(sql);
-
         jdbcTemplate.update(sql);
 
     }
@@ -46,7 +44,7 @@ public class UserDAO implements UserDBPort {
     @Override
     public User getUUID(UUID userUUID) {
         String sql = "select * " +
-                "from user " +
+                "from users " +
                 "where uuid = ('" + userUUID.toString() + "');";
 
         return jdbcTemplate.query(sql, userMapper).get(0);

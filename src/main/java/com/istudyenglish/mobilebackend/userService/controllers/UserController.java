@@ -2,6 +2,7 @@ package com.istudyenglish.mobilebackend.userService.controllers;
 
 
 import com.istudyenglish.mobilebackend.CustomException;
+import com.istudyenglish.mobilebackend.exercisesService.controllers.ValidateHeaders;
 import com.istudyenglish.mobilebackend.userService.adapters.token.Token;
 import com.istudyenglish.mobilebackend.userService.adapters.token.TokenAdapter;
 import com.istudyenglish.mobilebackend.userService.domain.User;
@@ -21,12 +22,14 @@ public class UserController {
 
     private UserUseCases userUseCases;
     private TokenAdapter tokenAdapter;
+    private ValidateHeaders validateHeaders;
 
 
     @Autowired
-    public UserController(UserUseCasesImp userUseCasesImp,TokenAdapter tokenAdapter) {
+    public UserController(UserUseCasesImp userUseCasesImp,TokenAdapter tokenAdapter,ValidateHeaders validateHeaders) {
         this.userUseCases = userUseCasesImp;
         this.tokenAdapter = tokenAdapter;
+        this.validateHeaders = validateHeaders;
     }
 
     @PostMapping("/create")
@@ -48,7 +51,7 @@ public class UserController {
 
     @GetMapping("/validateToken")
     public void validateToken(@RequestHeader Map<String, String> headers) throws CustomException {
-        userUseCases.validateToken(headers.get("token"),headers.get("user"));
+        validateHeaders.validateTokenAndUser(headers);
     }
 
 }

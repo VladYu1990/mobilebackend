@@ -34,7 +34,7 @@ public class Exercise {
      * Вопрос
      */
     @Setter
-    private Question question;
+    private String question;
     /**
      * Ответ
      */
@@ -42,7 +42,8 @@ public class Exercise {
     private Answer answer;
 
 
-    public boolean checkAnswer(UUID answerUUID){
-        return this.answer.getUuid().equals(answerUUID);
+    public boolean checkAnswer(Answer answer){
+        return this.answer.getUuid() == answer.getUuid();
     }
+
 }

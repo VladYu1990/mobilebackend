@@ -1,5 +1,7 @@
 package com.istudyenglish.mobilebackend.exercisesService.domain;
 
+import com.istudyenglish.mobilebackend.exercisesService.domain.exercise.Exercise;
+import com.istudyenglish.mobilebackend.userService.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,11 +28,11 @@ public class Task implements Comparable<Task> {
     /**
      * Связь с исходным упражнением
      */
-    private UUID exerciseUUID;
+    private Exercise exercise;
     /**
      * Связь задания со студентом
      */
-    private UUID userUUID;
+    private User user;
 
     /**
      * Время, после которого можно повторить задание
@@ -49,10 +51,10 @@ public class Task implements Comparable<Task> {
      */
     private int countRightResponses;
 
-    public Task(UUID exerciseUUID, UUID userUUID) {
+    public Task(Exercise exercise,User user) {
         this.uuid = UUID.randomUUID();
-        this.exerciseUUID = exerciseUUID;
-        this.userUUID = userUUID;
+        this.exercise = exercise;
+        this.user = user;
         this.nextRepetition = Instant.now();
         this.lastRepetition = Instant.now();
         this.status = TaskStatus.NOT_READY;
@@ -94,7 +96,7 @@ public class Task implements Comparable<Task> {
     }
 
     public boolean checkUserAffiliation(UUID userUUID){
-        return this.userUUID.equals(userUUID);
+        return this.user.equals(userUUID);
     }
 
     @Override

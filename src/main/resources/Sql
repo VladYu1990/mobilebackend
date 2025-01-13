@@ -54,9 +54,24 @@ CONSTRAINT only_one_unique_task_on_user UNIQUE (exercise_uuid,user_uuid)
 create table exercises(
 uuid uuid primary key,
 types_of_exercise text,
-source_uuid text,
-question_uuid uuid,
-answer_uuid uuid
+source_uuid uuid,
+question text,
+answer text,
+CONSTRAINT only_one_unique_exercise_with_type_on_source UNIQUE (types_of_exercise ,source_uuid)
+);
+
+create table answers(
+uuid uuid primary key,
+value text,
+language text,
+CONSTRAINT only_one_unique_value UNIQUE (value)
+);
+
+create table similar_text (
+answer1 uuid,
+answer2 uuid,
+similarity_coefficient NUMERIC(5,4),
+CONSTRAINT pair_uniqueness UNIQUE (answer1,answer2)
 );
 
 

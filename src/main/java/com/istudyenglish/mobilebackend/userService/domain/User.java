@@ -61,7 +61,7 @@ public class User {
         if(token == null){
             return false;
         }
-        if(Instant.now().isBefore(dateOfDeathToken)){
+        if(Instant.now().isAfter(dateOfDeathToken)){
             return false;
         }
         return true;
@@ -70,6 +70,12 @@ public class User {
     private void setNewToken(){
         this.token = UUID.randomUUID();
         this.dateOfDeathToken = Instant.now().plusSeconds(30*24*60*60);
+    }
+
+    public boolean tokenBelong(UUID token){
+        return this.token.toString().equals(token.toString());
+
+
     }
 
 

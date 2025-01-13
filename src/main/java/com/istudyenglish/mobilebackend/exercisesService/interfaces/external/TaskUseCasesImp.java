@@ -2,8 +2,10 @@ package com.istudyenglish.mobilebackend.exercisesService.interfaces.external;
 
 import com.istudyenglish.mobilebackend.CustomException;
 import com.istudyenglish.mobilebackend.exercisesService.domain.Task;
+import com.istudyenglish.mobilebackend.exercisesService.domain.exercise.Exercise;
 import com.istudyenglish.mobilebackend.exercisesService.interfaces.internal.task.TaskDAO;
 import com.istudyenglish.mobilebackend.exercisesService.interfaces.internal.task.TaskDBPort;
+import com.istudyenglish.mobilebackend.userService.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,9 +25,9 @@ public class TaskUseCasesImp implements TaskUseCases{
     }
 
     @Override
-    public List<Task> getNextOnlyStudy(UUID userUUID, int count){
+    public List<Task> getNextOnlyStudy(User user, int count){
 
-        return taskDBPort.getNextOnlyStudy(userUUID,count);
+        return taskDBPort.getNextOnlyStudy(user,count);
     }
 
     @Override
@@ -46,11 +48,11 @@ public class TaskUseCasesImp implements TaskUseCases{
     }
 
     @Override
-    public void create(List<UUID> exerciseUUIDList,UUID userUUID) {
+    public void create(List<Exercise> exerciseList, User user) {
         //todo проверку что у юзера достаточно баланса на таски
         List<Task> taskList = new ArrayList<>();
-        for(UUID exerciseUUID: exerciseUUIDList){
-            taskList.add(new Task(exerciseUUID,userUUID));
+        for(Exercise e: exerciseList){
+            taskList.add(new Task(e,user));
         }
 
         taskDBPort.create(taskList);

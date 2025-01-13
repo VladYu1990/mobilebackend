@@ -1,11 +1,14 @@
 package com.istudyenglish.mobilebackend.exercisesService.interfaces.external;
 
+import com.istudyenglish.mobilebackend.exercisesService.domain.answer.Answer;
 import com.istudyenglish.mobilebackend.exercisesService.domain.exercise.Exercise;
 import com.istudyenglish.mobilebackend.exercisesService.interfaces.internal.exercise.ExerciseDAO;
 import com.istudyenglish.mobilebackend.exercisesService.interfaces.internal.exercise.ExerciseDBPort;
+import com.istudyenglish.mobilebackend.userService.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.xml.transform.Source;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -13,13 +16,11 @@ import java.util.UUID;
 @Component
 public class ExerciseUseCasesImp implements ExerciseUseCases {
     ExerciseDBPort exerciseDBPort;
-    TaskUseCases taskUseCases;
 
 
     @Autowired
-    public ExerciseUseCasesImp(ExerciseDAO exerciseDAO,TaskUseCasesImp taskUseCasesImp) {
+    public ExerciseUseCasesImp(ExerciseDAO exerciseDAO) {
         this.exerciseDBPort = exerciseDAO;
-        this.taskUseCases = taskUseCasesImp;
     }
 
     @Override
@@ -37,23 +38,13 @@ public class ExerciseUseCasesImp implements ExerciseUseCases {
     }
 
     @Override
-    public void create(UUID wordUUID) {
+    public void create(Source source) {
         //todo it
     }
 
     @Override
-    public boolean checkAnswer(UUID exerciseUUID,UUID answerUUID) {
-        Exercise exercise = getOnUUID(exerciseUUID);
-        return exercise.checkAnswer(answerUUID);
+    public boolean checkAnswer(Exercise exercise, Answer answer) {
+        return exercise.checkAnswer(answer);
     }
 
-    @Override
-    public void addForUser(UUID sourceUUID,UUID userUUID) {
-        List<Exercise> exerciseList = exerciseDBPort.genOnSourceUUID(sourceUUID);
-        List<UUID> exerciseUUIDList = new ArrayList<>();
-        for(Exercise exercise:exerciseList){
-            exerciseUUIDList.add(exercise.getUuid());
-        }
-        taskUseCases.create(exerciseUUIDList,userUUID);
-    }
 }

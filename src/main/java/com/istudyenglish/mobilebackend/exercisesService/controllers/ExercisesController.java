@@ -4,49 +4,53 @@ package com.istudyenglish.mobilebackend.exercisesService.controllers;
 import com.istudyenglish.mobilebackend.CustomException;
 import com.istudyenglish.mobilebackend.exercisesService.adapters.ExerciseForView;
 import com.istudyenglish.mobilebackend.exercisesService.interfaces.external.*;
-import com.istudyenglish.mobilebackend.userService.interfaces.external.UserUseCases;
-import com.istudyenglish.mobilebackend.userService.interfaces.external.UserUseCasesImp;
 import lombok.extern.log4j.Log4j2;
+import netscape.javascript.JSObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
 @RestController
-@RequestMapping("/exercise/")
+@RequestMapping("/exercises/")
 @Log4j2
 public class ExercisesController {
 
-    UserUseCases userUseCases;
-    ExerciseForViewUseCases exerciseForViewUseCases;
+    private LogicsForControllers logicsForControllers;
+    private ValidateHeaders validateHeaders;
 
     @Autowired
-    public ExercisesController(UserUseCasesImp userUseCasesImp, ExerciseForViewUseCasesImp exerciseForViewUseCasesImp) {
-        this.userUseCases = userUseCasesImp;
-        this.exerciseForViewUseCases = exerciseForViewUseCasesImp;
+    public ExercisesController(LogicsForControllers logicsForControllers, ValidateHeaders validateHeaders) {
+        this.logicsForControllers = logicsForControllers;
+        this.validateHeaders = validateHeaders;
     }
 
-    @GetMapping("/next/{countExercise}")
-    public List<ExerciseForView> getNext(@RequestHeader Map<String, String> headers,
-                                         @RequestParam int countExercise) throws CustomException {
+    @GetMapping("/next/{countExercises}/{countAnswer}")
+    public Object getNext(@RequestHeader Map<String, String> headers,
+                          @PathVariable int countExercises,
+                          @PathVariable int countAnswer){
+        try {
+            validateHeaders.validateTokenAndUser(headers);
+        }
 
-        userUseCases.validateToken(
-                headers.get("token"),
-                headers.get("user"));
+        catch (CustomException e){
+            return e.getMessage();
+        }
 
-        return exerciseForViewUseCases.getNextList(
-                UUID.fromString(headers.get("user")),
-                countExercise);
+        UUID userUUID = UUID.fromString(headers.get("user"));
+
+        return logicsForControllers.nextExercises(userUUID,countExercises,countAnswer);
     }
 
-    @PostMapping("/addForUserByWord/{wordUUID}")
+    //TODO требует проверки на работоспособность
+    @PostMapping("/addForUserBySource/{sourceUUID}")
     public void  addForUser(@RequestHeader Map<String, String> headers,
-                            @RequestParam String wordUUID) throws CustomException {
-        userUseCases.validateToken(
-                headers.get("token"),
-                headers.get("user"));
+                            @RequestParam String sourceUUID) throws CustomException {
+        validateHeaders.validateTokenAndUser(headers);
 
-        exerciseForViewUseCases.addForUser(UUID.fromString(wordUUID),UUID.fromString(headers.get("user")));
+        UUID userUUID = UUID.fromString(headers.get("user"));
+        //TODO
+        //exerciseForViewUseCases.addForUser(UUID.fromString(wordUUID),UUID.fromString(headers.get("user")));
     }
 
 }

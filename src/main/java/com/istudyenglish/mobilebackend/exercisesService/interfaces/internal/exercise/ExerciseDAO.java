@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,22 +26,23 @@ public class ExerciseDAO implements ExerciseDBPort {
 
     @Override
     public List<Exercise> genOnUUIDs(List<UUID> exerciseUUIDsList) {
+        List<Exercise> exerciseList = new ArrayList<>();
+        if(!exerciseUUIDsList.isEmpty()) {
 
-        StringBuilder stringBuilder = new StringBuilder();
-        //todo доработать блок селекта и маппер
-        stringBuilder.append("select e.*,t1.*,t2.* " +
-                "from exercise as e,text as t1,text as t2 " +
-                "where e.question_uuid = t1.uuid " +
-                "and e.answer_uuid =t2.uuid " +
-                "and uuid in (");
-        for(UUID uuid: exerciseUUIDsList){
-            stringBuilder.append(uuid.toString());
-            stringBuilder.append(",");
+            StringBuilder stringBuilder = new StringBuilder("('" + exerciseUUIDsList.remove(0).toString() + "'");
+
+            for (UUID uuid : exerciseUUIDsList) {
+                stringBuilder.append(",'" + uuid.toString() + "'");
+
+            }
+            String sql = "select *" +
+                    "from exercises " +
+                    "where uuid in  " + stringBuilder.toString() + ")";
+
+
+            exerciseList = jdbcTemplate.query(sql, exerciseMapper);
         }
-        stringBuilder.deleteCharAt(stringBuilder.length() -1);
-        stringBuilder.append(");");
-
-        return jdbcTemplate.query(stringBuilder.toString(), exerciseMapper);
+        return exerciseList;
 
     }
 

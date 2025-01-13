@@ -2,6 +2,7 @@ package com.istudyenglish.mobilebackend.exercisesService.interfaces.internal.tas
 
 import com.istudyenglish.mobilebackend.configuration.DataSource;
 import com.istudyenglish.mobilebackend.exercisesService.domain.Task;
+import com.istudyenglish.mobilebackend.userService.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -23,23 +24,27 @@ public class TaskDAO implements TaskDBPort {
     }
 
     @Override
-    public List<Task> getNextOnlyStudy(UUID userUUID, int count) {
+    public List<Task> getNextOnlyStudy(User user, int count) {
+
         String sql = "select * " +
-                "from task " +
-                "where user_uuid = " + userUUID.toString() + " " +
-                "and status = 'STUDY' " +
+                "from tasks " +
+                "where user_uuid in ('" + user.getUuid().toString() + "') " +
+                "and status in ('STUDY') " +
                 "order by next_repetition " +
-                "limit = " + count + ";";
+                "limit  " + count + ";";
 
         return jdbcTemplate.query(sql, taskMapper);
+
+
+
     }
 
     @Override
     public Task getByUserAndExercise(UUID userUUID, UUID exerciseUUID) {
         String sql = "select * " +
-                "from task " +
-                "where student_uuid = " + userUUID.toString() + " " +
-                "and exercise_UUID = " + exerciseUUID.toString() + ";";
+                "from tasks " +
+                "where student_uuid in ('" + userUUID.toString() + "') " +
+                "and exercise_UUID in ('" + exerciseUUID.toString() + "');";
 
 
         return jdbcTemplate.query(sql, taskMapper).get(0);
@@ -48,7 +53,7 @@ public class TaskDAO implements TaskDBPort {
     @Override
     public Task genOnUUID(UUID task) {
         String sql = "select * " +
-                "from task " +
+                "from tasks " +
                 "where uuid = " + task.toString() + ";";
 
 
@@ -60,11 +65,11 @@ public class TaskDAO implements TaskDBPort {
     public void create(List<Task> taskList) {
         StringBuilder stringBuilder = new StringBuilder();
         for(Task task: taskList)
-        stringBuilder.append("insert into task(uuid,exercise_uuid,user_uuid,next_repetition,last_repetition,status,count_right_responses) " +
+        stringBuilder.append("insert into tasks(uuid,exercise_uuid,user_uuid,next_repetition,last_repetition,status,count_right_responses) " +
                 "values(" +
-                task.getUuid() + "," +
-                task.getExerciseUUID() + "," +
-                task.getUserUUID() + "," +
+                task.getUuid().toString() + "," +
+                task.getExercise().getUuid().toString() + "," +
+                task.getUser().getUuid().toString() + "," +
                 task.getNextRepetition() + "," +
                 task.getLastRepetition() + "," +
                 task.getStatus().toString() + "," +
@@ -76,7 +81,7 @@ public class TaskDAO implements TaskDBPort {
 
     @Override
     public void update(Task task) {
-        String sql = "update task set " +
+        String sql = "update tasks set " +
                 "next_repetition = " + task.getNextRepetition() + "," +
                 "last_repetition = " + task.getLastRepetition() + "," +
                 "status = " + task.getStatus().toString() + "," +

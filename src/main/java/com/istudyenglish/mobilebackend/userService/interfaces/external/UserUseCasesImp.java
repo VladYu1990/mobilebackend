@@ -49,14 +49,17 @@ public class UserUseCasesImp implements UserUseCases {
     }
 
     @Override
-    public void validateToken(String token, String userStr) throws CustomException {
-        UUID tokenUUID = UUID.fromString(token);
-        UUID userUUID = UUID.fromString(userStr);
-
-        User user = userDBPort.getUUID(userUUID);
-        if(!user.isTokenAlive() || user.getToken().equals(tokenUUID)){
+    public void validateToken(UUID token, UUID user) throws CustomException {
+        User userOb = userDBPort.getUUID(user);
+        if(!userOb.isTokenAlive()
+                || !userOb.tokenBelong(token)){
             throw new CustomException();
         }
 
+    }
+
+    @Override
+    public User getUUID(UUID user) {
+        return userDBPort.getUUID(user);
     }
 }
