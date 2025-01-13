@@ -20,6 +20,10 @@ public AnswerForViewBuilder(SimilarAnswerUseCasesImp similarAnswerUseCases) {
     }
 
     public List<AnswerForView> build(Answer answerTrue, int maxCountAnswers){
+        maxCountAnswers = maxCountAnswers - 1;
+        if(maxCountAnswers<0){
+            maxCountAnswers = 0;
+        }
         return adapt(answerTrue, similarAnswerUseCases.getSimilarByAnswerUUID(answerTrue,maxCountAnswers));
     }
 
