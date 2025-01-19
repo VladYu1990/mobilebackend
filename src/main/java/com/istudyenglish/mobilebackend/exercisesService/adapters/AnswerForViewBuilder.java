@@ -34,13 +34,13 @@ public AnswerForViewBuilder(SimilarAnswerUseCasesImp similarAnswerUseCases) {
             list.add(new AnswerForView(
                     answer.getUuid().toString(),
                     answer.getValue(),
-                    answer.getLanguage(),
+                    answer.getLanguage().toString(),
                     false));
         }
         list.add(new AnswerForView(
                 answerTrue.getUuid().toString(),
                 answerTrue.getValue(),
-                answerTrue.getLanguage(),
+                answerTrue.getLanguage().toString(),
                 true));
 
         Collections.shuffle(list);

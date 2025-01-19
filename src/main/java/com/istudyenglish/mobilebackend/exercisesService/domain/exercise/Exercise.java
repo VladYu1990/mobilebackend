@@ -1,7 +1,6 @@
 package com.istudyenglish.mobilebackend.exercisesService.domain.exercise;
 
 
-import com.istudyenglish.mobilebackend.exercisesService.domain.Question;
 import com.istudyenglish.mobilebackend.exercisesService.domain.answer.Answer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,19 +26,20 @@ public class Exercise {
      */
     private TypesOfExercise typesOfExercise;
     /**
-     * Тип источника для упражнения
+     * UUID источника для упражнения
      */
     private UUID sourceUUID;
     /**
      * Вопрос
      */
     @Setter
-    private String question;
+    private Answer question;
     /**
      * Ответ
      */
     @Setter
     private Answer answer;
+
 
 
     public boolean checkAnswer(Answer answer){

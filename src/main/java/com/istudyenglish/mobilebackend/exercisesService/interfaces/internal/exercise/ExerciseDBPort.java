@@ -8,8 +8,8 @@ import java.util.UUID;
 public interface ExerciseDBPort {
 
     public List<Exercise> genOnUUIDs(List<UUID> exerciseUUIDsList);
-    public void create(Exercise exercise);
-    public void update(Exercise exercise);
-
+    public void save(Exercise exercise);
     public List<Exercise> genOnSourceUUID(UUID sourceUUID);
+
+    public List<Exercise> getAll();
 }

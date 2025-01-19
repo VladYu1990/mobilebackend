@@ -29,8 +29,8 @@ public class ExerciseMapper implements RowMapper<Exercise> {
                 uuid(UUID.fromString(resultSet.getString("uuid"))).
                 typesOfExercise(TypesOfExercise.valueOf(resultSet.getString("types_of_exercise"))).
                 sourceUUID(UUID.fromString(resultSet.getString("source_uuid"))).
-                question(resultSet.getString("question")).
-                answer(answerUseCases.getByValue(resultSet.getString("answer"))).
+                question(answerUseCases.getByUUID(UUID.fromString(resultSet.getString("question")))).
+                answer(answerUseCases.getByUUID(UUID.fromString(resultSet.getString("answer")))).
                 build();
     }
 }

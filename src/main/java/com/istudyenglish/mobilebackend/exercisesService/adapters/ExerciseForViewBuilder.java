@@ -1,11 +1,7 @@
 package com.istudyenglish.mobilebackend.exercisesService.adapters;
 
 
-import com.istudyenglish.mobilebackend.configuration.Configuration;
-import com.istudyenglish.mobilebackend.exercisesService.domain.Task;
-import com.istudyenglish.mobilebackend.exercisesService.domain.answer.Answer;
 import com.istudyenglish.mobilebackend.exercisesService.domain.exercise.Exercise;
-import com.istudyenglish.mobilebackend.exercisesService.interfaces.external.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -36,7 +32,7 @@ public class ExerciseForViewBuilder {
 
         return ExerciseForView.builder().
                 exerciseUUID(exercise.getUuid().toString()).
-                question(exercise.getQuestion()).
+                question(exercise.getQuestion().getValue()).
                 //todo добавить примеры в БД & упражнение и подтянуть
                 example("когда-то тут будет хороший пример, пока так").
                 typesOfExercise(exercise.getTypesOfExercise()).

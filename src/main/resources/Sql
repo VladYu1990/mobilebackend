@@ -1,14 +1,16 @@
 NEW
 
 
-create table words(
+create table sources(
 uuid uuid primary key,
-value text,
-translate text,
-value_language text,
-translate_language text,
-part_of_speech_code integer,
-CONSTRAINT only_one_uuid_word UNIQUE (uuid)
+text_from text,
+from_example text,
+from_language text,
+text_to text,
+to_example text,
+to_language text,
+part_of_speech_code text,
+CONSTRAINT only_one_uuid_word UNIQUE (uuid,text_from,text_to,to_language,from_language)
 );
 
 create table text(
@@ -46,7 +48,7 @@ user_uuid text,
 next_repetition timestamp,
 last_repetition timestamp,
 status text,
-count_right_responses int
+count_right_responses int,
 CONSTRAINT only_one_unique_task_on_user UNIQUE (exercise_uuid,user_uuid)
 );
 
@@ -55,10 +57,9 @@ create table exercises(
 uuid uuid primary key,
 types_of_exercise text,
 source_uuid uuid,
-question text,
+question uuid,
 answer text,
-CONSTRAINT only_one_unique_exercise_with_type_on_source UNIQUE (types_of_exercise ,source_uuid)
-);
+CONSTRAINT only_one_unique_exercise_with_type_and_source UNIQUE (types_of_exercise,source_uuid));
 
 create table answers(
 uuid uuid primary key,

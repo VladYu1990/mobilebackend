@@ -1,7 +1,7 @@
 package com.istudyenglish.mobilebackend.exercisesService.interfaces.internal.task;
 
 import com.istudyenglish.mobilebackend.configuration.DataSource;
-import com.istudyenglish.mobilebackend.exercisesService.domain.Task;
+import com.istudyenglish.mobilebackend.exercisesService.domain.task.Task;
 import com.istudyenglish.mobilebackend.userService.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -64,19 +64,19 @@ public class TaskDAO implements TaskDBPort {
     @Override
     public void create(List<Task> taskList) {
         StringBuilder stringBuilder = new StringBuilder();
-        for(Task task: taskList)
-        stringBuilder.append("insert into tasks(uuid,exercise_uuid,user_uuid,next_repetition,last_repetition,status,count_right_responses) " +
-                "values(" +
-                task.getUuid().toString() + "," +
-                task.getExercise().getUuid().toString() + "," +
-                task.getUser().getUuid().toString() + "," +
-                task.getNextRepetition() + "," +
-                task.getLastRepetition() + "," +
-                task.getStatus().toString() + "," +
-                task.getCountRightResponses() + ",);/n");
+        for(Task task: taskList) {
+            stringBuilder.append("insert into tasks(uuid,exercise_uuid,user_uuid,next_repetition,last_repetition,status,count_right_responses) " +
+                    "values('" +
+                    task.getUuid().toString() + "','" +
+                    task.getExercise().getUuid().toString() + "','" +
+                    task.getUser().getUuid().toString() + "','" +
+                    task.getNextRepetition() + "','" +
+                    task.getLastRepetition() + "','" +
+                    task.getStatus().toString() + "','" +
+                    task.getCountRightResponses() + "');\n");
+        }
 
         jdbcTemplate.update(stringBuilder.toString());
-
     }
 
     @Override

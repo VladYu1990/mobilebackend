@@ -1,6 +1,7 @@
 package com.istudyenglish.mobilebackend.exercisesService.interfaces.external;
 
 import com.istudyenglish.mobilebackend.configuration.Configuration;
+import com.istudyenglish.mobilebackend.dictionary.domain.Language;
 import com.istudyenglish.mobilebackend.exercisesService.domain.answer.Answer;
 import com.istudyenglish.mobilebackend.exercisesService.interfaces.internal.answer.AnswerDAO;
 import com.istudyenglish.mobilebackend.exercisesService.interfaces.internal.answer.AnswerDBPort;
@@ -25,7 +26,18 @@ public class AnswerUseCasesImp implements AnswerUseCases {
     }
 
     @Override
-    public Answer getByValue(String value) {
-        return answerDBPort.get(value);
+    public Answer getByValue(String value,Language lang) {
+        try{
+            return answerDBPort.get(value,lang);
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
+
+    @Override
+    public void create(String answer, Language lan) {
+        Answer answer1 = new Answer(answer,lan);
+        answerDBPort.save(answer1);
     }
 }

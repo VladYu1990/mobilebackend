@@ -1,12 +1,15 @@
 package com.istudyenglish.mobilebackend.exercisesService.interfaces.internal.answer;
 
 import com.istudyenglish.mobilebackend.configuration.DataSource;
+import com.istudyenglish.mobilebackend.dictionary.domain.Language;
 import com.istudyenglish.mobilebackend.exercisesService.domain.answer.Answer;
 import com.istudyenglish.mobilebackend.exercisesService.domain.answer.SimilarAnswer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -44,17 +47,18 @@ public class AnswerDAO implements AnswerDBPort {
 
     @Override
     public Answer get(UUID answerUUID) {
-        String sql = "select * " +
-                "from answers " +
-                "where uuid in ('" + answerUUID.toString() + "');";
-        return jdbcTemplate.query(sql, answerMapper).get(0);
+            String sql = "select * " +
+                    "from answers " +
+                    "where uuid in ('" + answerUUID.toString() + "');";
+            return jdbcTemplate.query(sql, answerMapper).get(0);
     }
 
     @Override
-    public Answer get(String value) {
-        String sql = "select * " +
-                "from answers " +
-                "where value in ('" + value + "');";
+    public Answer get(String value, Language land){
+            String sql = "select * " +
+                    "from answers " +
+                    "where value in ('" + value + "') " +
+                    "and language in ('" + land + "');";
         return jdbcTemplate.query(sql, answerMapper).get(0);
     }
 
@@ -95,5 +99,19 @@ public class AnswerDAO implements AnswerDBPort {
 
         jdbcTemplate.update(sql);
 
+    }
+
+    @Override
+    public void save(Answer answer) {
+        try {
+            String sql = "INSERT INTO public.answers" + "(\"uuid\", value, \"language\") " +
+                    "VALUES('" +
+                    answer.getUuid().toString() + "','" +
+                    answer.getValue() + "','" +
+                    answer.getLanguage().toString() + "');";
+
+            jdbcTemplate.update(sql);
+        }
+        catch (DataAccessException ignored){}
     }
 }

@@ -1,4 +1,4 @@
-package com.istudyenglish.mobilebackend.exercisesService.domain;
+package com.istudyenglish.mobilebackend.exercisesService.domain.task;
 
 import com.istudyenglish.mobilebackend.exercisesService.domain.exercise.Exercise;
 import com.istudyenglish.mobilebackend.userService.domain.User;

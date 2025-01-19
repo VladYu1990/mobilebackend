@@ -1,26 +1,28 @@
 package com.istudyenglish.mobilebackend.exercisesService.interfaces.external;
 
+import com.istudyenglish.mobilebackend.dictionary.domain.Source;
 import com.istudyenglish.mobilebackend.exercisesService.domain.answer.Answer;
 import com.istudyenglish.mobilebackend.exercisesService.domain.exercise.Exercise;
 import com.istudyenglish.mobilebackend.exercisesService.interfaces.internal.exercise.ExerciseDAO;
 import com.istudyenglish.mobilebackend.exercisesService.interfaces.internal.exercise.ExerciseDBPort;
-import com.istudyenglish.mobilebackend.userService.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.xml.transform.Source;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Component
 public class ExerciseUseCasesImp implements ExerciseUseCases {
-    ExerciseDBPort exerciseDBPort;
+    private ExerciseDBPort exerciseDBPort;
+    private BuilderExercises builderExercises;
 
 
     @Autowired
-    public ExerciseUseCasesImp(ExerciseDAO exerciseDAO) {
+    public ExerciseUseCasesImp(ExerciseDAO exerciseDAO,BuilderExercises builderExercises) {
         this.exerciseDBPort = exerciseDAO;
+        this.builderExercises = builderExercises;
     }
 
     @Override
@@ -38,8 +40,17 @@ public class ExerciseUseCasesImp implements ExerciseUseCases {
     }
 
     @Override
+    public List<Exercise> getAll() {
+        return exerciseDBPort.getAll();
+    }
+
+    @Override
     public void create(Source source) {
-        //todo it
+        List<Exercise> exerciseList = builderExercises.build(source);
+        for(Exercise exr:exerciseList){
+            save(exr);
+        }
+
     }
 
     @Override
@@ -47,4 +58,8 @@ public class ExerciseUseCasesImp implements ExerciseUseCases {
         return exercise.checkAnswer(answer);
     }
 
+    @Override
+    public void save(Exercise exercise) {
+        exerciseDBPort.save(exercise);
+    }
 }

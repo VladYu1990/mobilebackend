@@ -1,7 +1,7 @@
 package com.istudyenglish.mobilebackend.exercisesService.interfaces.external;
 
 import com.istudyenglish.mobilebackend.CustomException;
-import com.istudyenglish.mobilebackend.exercisesService.domain.Task;
+import com.istudyenglish.mobilebackend.exercisesService.domain.task.Task;
 import com.istudyenglish.mobilebackend.exercisesService.domain.exercise.Exercise;
 import com.istudyenglish.mobilebackend.exercisesService.interfaces.internal.task.TaskDAO;
 import com.istudyenglish.mobilebackend.exercisesService.interfaces.internal.task.TaskDBPort;
@@ -46,6 +46,12 @@ public class TaskUseCasesImp implements TaskUseCases{
     public void giveAnswer(UUID userUUID, UUID taskUUID, UUID answerUUID, Instant timeAnswer) throws CustomException {
         //todo
     }
+    @Override
+    public void create(Exercise exercise, User user) {
+        List<Exercise> exerciseList = new ArrayList<>();
+        exerciseList.add(exercise);
+        create(exerciseList,user);
+    }
 
     @Override
     public void create(List<Exercise> exerciseList, User user) {
@@ -57,7 +63,6 @@ public class TaskUseCasesImp implements TaskUseCases{
 
         taskDBPort.create(taskList);
     }
-
 
     private void checkTaskBelongsUser(UUID userUUID, Task task) throws CustomException {
         if(!task.checkUserAffiliation(userUUID)){

@@ -42,15 +42,39 @@ public class ExercisesController {
         return logicsForControllers.nextExercises(userUUID,countExercises,countAnswer);
     }
 
-    //TODO требует проверки на работоспособность
-    @PostMapping("/addForUserBySource/{sourceUUID}")
+    //TODO требует проверки на работоспособность и скорее всего это все же создание таски
+    @PostMapping("/add_user/{exerciseUUID}")
     public void  addForUser(@RequestHeader Map<String, String> headers,
-                            @RequestParam String sourceUUID) throws CustomException {
+                            @RequestParam String exerciseUUID) throws CustomException {
         validateHeaders.validateTokenAndUser(headers);
 
         UUID userUUID = UUID.fromString(headers.get("user"));
-        //TODO
-        //exerciseForViewUseCases.addForUser(UUID.fromString(wordUUID),UUID.fromString(headers.get("user")));
+        UUID sourseUUID = UUID.fromString(exerciseUUID);
+        logicsForControllers.AddTask(sourseUUID,userUUID);
+    }
+
+//todo перед боевой выкладкой скрыть данную апи для большинства юзеров
+    @PostMapping("/add_user_all/")
+    public void  addAllForUser(@RequestHeader Map<String, String> headers) throws Exception {
+        validateHeaders.validateTokenAndUser(headers);
+
+        UUID userUUID = UUID.fromString(headers.get("user"));
+        logicsForControllers.addTaskAll(userUUID);
+    }
+
+    @PostMapping("/create/")
+    public void  create(@RequestHeader Map<String, String> headers) throws CustomException {
+
+        logicsForControllers.createExercises();
+
+    }
+
+    @PostMapping("/create/{source_id}")
+    public void  create(@RequestHeader Map<String, String> headers,
+                        @RequestParam String sourceUUID) throws CustomException {
+
+        logicsForControllers.createExercise(sourceUUID);
+
     }
 
 }

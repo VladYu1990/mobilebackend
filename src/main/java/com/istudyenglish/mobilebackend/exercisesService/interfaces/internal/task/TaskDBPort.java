@@ -1,6 +1,6 @@
 package com.istudyenglish.mobilebackend.exercisesService.interfaces.internal.task;
 
-import com.istudyenglish.mobilebackend.exercisesService.domain.Task;
+import com.istudyenglish.mobilebackend.exercisesService.domain.task.Task;
 import com.istudyenglish.mobilebackend.userService.domain.User;
 
 import java.util.List;

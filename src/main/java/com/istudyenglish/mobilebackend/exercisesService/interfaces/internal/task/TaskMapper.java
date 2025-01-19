@@ -1,8 +1,7 @@
 package com.istudyenglish.mobilebackend.exercisesService.interfaces.internal.task;
 
-import com.istudyenglish.mobilebackend.exercisesService.domain.Task;
-import com.istudyenglish.mobilebackend.exercisesService.domain.TaskStatus;
-import com.istudyenglish.mobilebackend.exercisesService.domain.exercise.Exercise;
+import com.istudyenglish.mobilebackend.exercisesService.domain.task.Task;
+import com.istudyenglish.mobilebackend.exercisesService.domain.task.TaskStatus;
 import com.istudyenglish.mobilebackend.exercisesService.interfaces.external.ExerciseUseCases;
 import com.istudyenglish.mobilebackend.exercisesService.interfaces.external.ExerciseUseCasesImp;
 import com.istudyenglish.mobilebackend.userService.interfaces.external.UserUseCases;

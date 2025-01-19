@@ -1,4 +1,4 @@
-package com.istudyenglish.mobilebackend.exercisesService.domain;
+package com.istudyenglish.mobilebackend.exercisesService.domain.task;
 
 /**
  * Статус конкретной таски

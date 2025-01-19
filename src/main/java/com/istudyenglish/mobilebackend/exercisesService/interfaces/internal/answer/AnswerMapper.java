@@ -1,7 +1,6 @@
 package com.istudyenglish.mobilebackend.exercisesService.interfaces.internal.answer;
 
-import com.istudyenglish.mobilebackend.exercisesService.domain.Task;
-import com.istudyenglish.mobilebackend.exercisesService.domain.TaskStatus;
+import com.istudyenglish.mobilebackend.dictionary.domain.Language;
 import com.istudyenglish.mobilebackend.exercisesService.domain.answer.Answer;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
@@ -19,7 +18,7 @@ public class AnswerMapper implements RowMapper<Answer> {
         return Answer.builder().
                 uuid(UUID.fromString(resultSet.getString("uuid"))).
                 value(resultSet.getString("value")).
-                language(resultSet.getString("language")).
+                language(Language.valueOf(resultSet.getString("language"))).
                 build();
     }
 }

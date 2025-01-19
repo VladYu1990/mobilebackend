@@ -1,9 +1,9 @@
 package com.istudyenglish.mobilebackend.exercisesService.interfaces.internal.exercise;
 
 import com.istudyenglish.mobilebackend.configuration.DataSource;
-import com.istudyenglish.mobilebackend.exercisesService.domain.Task;
 import com.istudyenglish.mobilebackend.exercisesService.domain.exercise.Exercise;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -47,15 +47,28 @@ public class ExerciseDAO implements ExerciseDBPort {
     }
 
     @Override
-    public void create(Exercise exercise) {
-        //todo
+    public List<Exercise> getAll() {
+        String sql = "select *" +
+                "from exercises";
 
-
+        return jdbcTemplate.query(sql, exerciseMapper);
     }
 
     @Override
-    public void update(Exercise exercise) {
+    public void save(Exercise exercise) {
+        try{
+            String sql = "INSERT INTO public.exercises\n" +
+                    "(\"uuid\", types_of_exercise, source_uuid, question, answer)\n" +
+                    "VALUES('" +
+                    exercise.getUuid() + "','" +
+                    exercise.getTypesOfExercise().toString() + "','" +
+                    exercise.getSourceUUID().toString() + "','" +
+                    exercise.getQuestion().getUuid().toString() + "','" +
+                    exercise.getAnswer().getUuid().toString() + "');";
 
+            jdbcTemplate.update(sql);
+        }
+        catch (DataAccessException ignored){}
     }
 
     @Override
@@ -66,6 +79,4 @@ public class ExerciseDAO implements ExerciseDBPort {
 
         return jdbcTemplate.query(sql, exerciseMapper);
     }
-
-
 }
